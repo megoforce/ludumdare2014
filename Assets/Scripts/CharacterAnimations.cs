@@ -33,9 +33,9 @@ public class CharacterAnimations : MonoBehaviour {
 		int v = 10 - (int)(Mathf.Abs(speed*6));
 
 		if(speed > 0){
-			sprite.spriteId = 8 - offsetH;
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(8 - offsetH).ToString());
 		} else {
-			sprite.spriteId = 5 - offsetH;
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(5 - offsetH).ToString());
 		}
 
 		if((fCounter % v) == 0){
@@ -46,9 +46,9 @@ public class CharacterAnimations : MonoBehaviour {
 		int v = 10 - (int)(Mathf.Abs(speed*6));
 		
 		if(speed > 0){
-			sprite.spriteId = 11 - offsetH;
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(11 - offsetH).ToString());
 		} else {
-			sprite.spriteId = 2 - offsetH;
+				sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(2 - offsetH).ToString());
 		}
 		
 		if((fCounter % v) == 0){
