@@ -12,8 +12,8 @@ public class WorldGenerator : MonoBehaviour {
 	
 
 	void Start(){
-		for(int i = 0; i < 32;i++){
-			for(int j = 0; j < 32;j++){
+		for(int i = 0; i < tileMap.width;i++){
+			for(int j = 0; j < tileMap.height;j++){
 				tileMap.Layers[0].SetTile(i,j,0);
 				if(Random.Range(0,300)>sky) {
 					tileMap.Layers[1].SetTile(i,j,1+Random.Range(0,4));
