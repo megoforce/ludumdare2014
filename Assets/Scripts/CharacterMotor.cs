@@ -3,7 +3,8 @@ using System.Collections;
 using System;
 using InControl;
 
-public class PlayerMotor : MonoBehaviour {
+public class CharacterMotor : MonoBehaviour {
+	public bool AI = false;
 	float ampVelocity = 70f;
 	Transform myTransform;
 	public Rigidbody myRigidbody;

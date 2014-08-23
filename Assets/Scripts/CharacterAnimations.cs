@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerAnimations : MonoBehaviour {
+public class CharacterAnimations : MonoBehaviour {
 	public tk2dSprite sprite;
-	PlayerMotor playerMotor;
+	CharacterMotor playerMotor;
 
 	void Awake(){
-		playerMotor = GetComponent<PlayerMotor>();
+		playerMotor = GetComponent<CharacterMotor>();
 	}
 
 	int fCounter = 0;
