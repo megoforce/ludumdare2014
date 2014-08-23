@@ -31,7 +31,7 @@ public class PlayerAnimations : MonoBehaviour {
 	int offsetH = 0;
 
 	void WalkH(float speed){
-		int v = 10 - (int)(Mathf.Abs(speed*8));
+		int v = 10 - (int)(Mathf.Abs(speed*6));
 
 		if(speed > 0){
 			sprite.spriteId = 8 - offsetH;
@@ -44,7 +44,7 @@ public class PlayerAnimations : MonoBehaviour {
 		}
 	}
 	void WalkV(float speed){
-		int v = 10 - (int)(Mathf.Abs(speed*8));
+		int v = 10 - (int)(Mathf.Abs(speed*6));
 		
 		if(speed > 0){
 			sprite.spriteId = 11 - offsetH;
