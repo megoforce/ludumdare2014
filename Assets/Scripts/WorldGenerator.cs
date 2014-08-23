@@ -43,11 +43,16 @@ public class WorldGenerator : MonoBehaviour {
 			for(int y = 0; y < tileMap.width; y++){
 				if(Mathf.PerlinNoise(x*.07f,y*.07f) < .3f){
 					tileMap.Layers[5].SetTile(x,y,borderTileId);
+
 				}
 			}
 		}
 		//Add bottom to mesetas
+		for(int x = 0; x < tileMap.width; x++){
+			for(int y = 0; y < tileMap.width; y++){
 
+			}
+		}
 
 
 		tileMap.Build();
