@@ -22,7 +22,7 @@ public class WorldGenerator : MonoBehaviour {
 			for(int j = 0; j < tileMap.height;j++){
 				tileMap.Layers[0].SetTile(i,j,floorTileId);
 				if(Random.Range(0,300)>sky) {
-					tileMap.Layers[1].SetTile(i,j,1+Random.Range(0,4));
+					tileMap.Layers[1].SetTile(i,j,Random.Range(1,30));
 				}
 			}
 		}
