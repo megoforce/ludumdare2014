@@ -23,7 +23,7 @@ public class GameDataLoader : MonoBehaviour {
 		lat=RandomExt.RandomFloatBetween(-90,90);
 		lng=RandomExt.RandomFloatBetween(-180,180);
 		Debug.Log (lat);
-		string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat.ToString () + "&lon=" + lng.ToString ();
+		string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat.ToString () + "&lon=" + lng.ToString ()+"&units=metric";
 		Debug.Log(url);
 		WWW request = new WWW(url);
 		Debug.Log (request);
@@ -59,7 +59,7 @@ public class GameDataLoader : MonoBehaviour {
 			skyname=N["weather"][0]["main"].Value;
 
 			GlobalStuff.instance.gUIManager.labelTop.text = ""+lat.ToString()+","+lng.ToString()+" "+name.ToUpper()+", "+country;
-			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+temperature.ToString()+"F HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
+			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
 		}
 		else
 		{
