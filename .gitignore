@@ -55,3 +55,8 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+Assets/Images/character.ase.meta
+
+*.meta
+
+Assets/Images/character.png.meta
