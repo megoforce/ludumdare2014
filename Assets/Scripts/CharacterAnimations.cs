@@ -4,20 +4,21 @@ using System.Collections;
 public class CharacterAnimations : MonoBehaviour {
 	public tk2dSprite sprite;
 	CharacterMotor playerMotor;
-
+	CharacterProperties characterProperties;
 	void Awake(){
 		playerMotor = GetComponent<CharacterMotor>();
+		characterProperties = GetComponent<CharacterProperties>();
 	}
 
 	int fCounter = 0;
 	void FixedUpdate(){
 		fCounter ++;
 
-		if(playerMotor.horizontal != 0 || playerMotor.vertical != 0){
-			if(Mathf.Abs(playerMotor.horizontal) >= Mathf.Abs(playerMotor.vertical)){
-				WalkH(playerMotor.horizontal);
-			} else if(Mathf.Abs(playerMotor.horizontal) <= Mathf.Abs(playerMotor.vertical)){
-				WalkV(playerMotor.vertical);
+		if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
+			if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
+				WalkH(characterProperties.horizontal);
+			} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
+				WalkV(characterProperties.vertical);
 			}
 		}
 	}

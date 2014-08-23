@@ -4,22 +4,23 @@ using System;
 using InControl;
 
 public class CharacterMotor : MonoBehaviour {
-	public bool AI = false;
+
 	float ampVelocity = 70f;
 	Transform myTransform;
 	public Rigidbody myRigidbody;
-	public float horizontal;
-	public float vertical;
+
+	CharacterProperties characterProperties;
 
 	void Awake(){
 		myTransform = transform;
+		characterProperties = GetComponent<CharacterProperties>();
 		myTransform.position = new Vector3(20,20,myTransform.position.z);
 	}
 	void FixedUpdate () {
 		InputDevice inputDevice = InputManager.ActiveDevice;
-		horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
-		vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
-		Vector3 f = (horizontal*Vector3.right + vertical*Vector3.up)*ampVelocity;
+		characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
+		characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
+		Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;
 		myRigidbody.AddForce(f);
 
 
