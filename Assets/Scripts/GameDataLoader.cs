@@ -60,7 +60,7 @@ public class GameDataLoader : MonoBehaviour {
 			weather=float.Parse(N["weather"][0]["id"].Value);
 			skyname=N["weather"][0]["main"].Value;
 
-			GlobalStuff.instance.gUIManager.labelTop.text = ""+lat.ToString()+","+lng.ToString()+" "+name.ToUpper()+", "+country;
+			GlobalStuff.instance.gUIManager.labelTop.text = ""+lat.ToString()+","+lng.ToString()+" "+weatherName.ToUpper()+", "+country;
 			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
 
 			StartCoroutine(GlitchesOff());

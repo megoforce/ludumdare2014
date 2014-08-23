@@ -17,12 +17,13 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform.position = new Vector3(20,20,myTransform.position.z);
 	}
 	void FixedUpdate () {
-		InputDevice inputDevice = InputManager.ActiveDevice;
-		characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
-		characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
-		Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;
-		myRigidbody.AddForce(f);
 
-
+		if(!characterProperties.AI){
+			InputDevice inputDevice = InputManager.ActiveDevice;
+			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
+			characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
+			Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;
+			myRigidbody.AddForce(f);
+		}
 	}
 }

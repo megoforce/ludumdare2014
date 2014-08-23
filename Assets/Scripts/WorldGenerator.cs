@@ -43,7 +43,8 @@ public class WorldGenerator : MonoBehaviour {
 				
 			}
 		}
-		
+
+		GlobalStuff.instance.enemyGenerator.GenerateEnemies();
 		
 		tileMap.Build();
 	}

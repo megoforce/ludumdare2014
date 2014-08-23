@@ -6,4 +6,5 @@ public class CharacterProperties : MonoBehaviour {
 	public float horizontal;
 	public float vertical;
 	public string spriteName;
+
 }
