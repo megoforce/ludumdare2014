@@ -49,11 +49,16 @@ public class GameDataLoader : MonoBehaviour {
 
 			weather=float.Parse(N["weather"][0]["id"].Value);
 
+
+			GlobalStuff.instance.gUIManager.labelTop.text = "olakease";
+
 		}
 		else
 		{
 			Debug.Log("WWW error: " + request.error);
 		}
+
+
 	}
 	void Awake(){
 		if(PlayerPrefs.GetInt("isNotFirstTime") != 1 || forceReset){
