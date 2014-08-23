@@ -1,27 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerAnimations : MonoBehaviour {
 	public tk2dSprite sprite;
 	PlayerMotor playerMotor;
-
 
 	void Awake(){
 		playerMotor = GetComponent<PlayerMotor>();
 	}
 
 	int fCounter = 0;
-	void Update(){
+	void FixedUpdate(){
 		fCounter ++;
 
-
-		if(Mathf.Abs(playerMotor.horizontal) > Mathf.Abs(playerMotor.vertical)){
-			WalkH(playerMotor.horizontal);
-		} else if(Mathf.Abs(playerMotor.horizontal) < Mathf.Abs(playerMotor.vertical)){
-			WalkV(playerMotor.vertical);
+		if(playerMotor.horizontal != 0 || playerMotor.vertical != 0){
+			if(Mathf.Abs(playerMotor.horizontal) >= Mathf.Abs(playerMotor.vertical)){
+				WalkH(playerMotor.horizontal);
+			} else if(Mathf.Abs(playerMotor.horizontal) <= Mathf.Abs(playerMotor.vertical)){
+				WalkV(playerMotor.vertical);
+			}
 		}
-
 	}
 	/*
 		0 1 2 down

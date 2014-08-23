@@ -16,7 +16,7 @@ public class PlayerMotor : MonoBehaviour {
 		InputDevice inputDevice = InputManager.ActiveDevice;
 		horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
 		vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
-		myTransform.position += (horizontal*Vector3.right + vertical*Vector3.up)*ampVelocity;
+		myTransform.position += (horizontal*Vector3.right + vertical*Vector3.up)*ampVelocity * Time.deltaTime*60f;
 
 
 	}
