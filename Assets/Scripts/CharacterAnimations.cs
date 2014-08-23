@@ -3,10 +3,8 @@ using System.Collections;
 
 public class CharacterAnimations : MonoBehaviour {
 	public tk2dSprite sprite;
-	CharacterMotor playerMotor;
 	CharacterProperties characterProperties;
 	void Awake(){
-		playerMotor = GetComponent<CharacterMotor>();
 		characterProperties = GetComponent<CharacterProperties>();
 	}
 
