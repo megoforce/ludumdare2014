@@ -5,10 +5,12 @@ using SimpleJSON;
 
 public class GameDataLoader : MonoBehaviour {
 	public bool forceReset = false;
+	public WorldGenerator worldGenerator;
+
 	public float lat;
 	public float lng;
 	public string country;
-	public string name;
+	string weatherName;
 	public string skyname;
 	public float temperature;
 	public float humidity;
@@ -52,14 +54,16 @@ public class GameDataLoader : MonoBehaviour {
 			humidity=float.Parse(N["main"]["humidity"].Value);
 			pressure=float.Parse(N["main"]["pressure"].Value);
 
-			name=N["name"];
+			weatherName=N["name"];
 			Debug.Log(N["weather"][0]["id"].Value);
 
 			weather=float.Parse(N["weather"][0]["id"].Value);
 			skyname=N["weather"][0]["main"].Value;
 
-			GlobalStuff.instance.gUIManager.labelTop.text = ""+lat.ToString()+","+lng.ToString()+" "+name.ToUpper()+", "+country;
+			GlobalStuff.instance.gUIManager.labelTop.text = ""+lat.ToString()+","+lng.ToString()+" "+weatherName.ToUpper()+", "+country;
 			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+temperature.ToString()+"F HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
+
+			StartCoroutine(GlitchesOff());
 		}
 		else
 		{
@@ -80,4 +84,31 @@ public class GameDataLoader : MonoBehaviour {
 		PlayerPrefs.SetInt("isNotFirstTime",1);
 		
 	}
+
+	IEnumerator GlitchesOff(){
+		GlobalStuff.instance.gUIManager.glitchEffect.enabled = false;
+		yield return new WaitForSeconds(1f);
+		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname);
+		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
