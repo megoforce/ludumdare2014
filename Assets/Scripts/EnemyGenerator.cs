@@ -6,10 +6,7 @@ public class EnemyGenerator : MonoBehaviour {
 	public void GenerateEnemies(){
 		GameObject newEnemy = Instantiate(characterPrefab) as GameObject;
 		CharacterProperties cp = newEnemy.GetComponent<CharacterProperties>();
-		print("cp"+cp);
-		print("new enemy"+newEnemy);
-		cp.AI = true;
-		cp.spriteName = "enemy";
+		cp.Init(true);
 		newEnemy.transform.position = new Vector3(2,2,0);
 	}
 }
