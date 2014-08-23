@@ -14,6 +14,9 @@ public class GameDataLoader : MonoBehaviour {
 	public float weather;
 	IEnumerator Start() {
 		Debug.Log ("Searching for weather data...");
+		
+		GlobalStuff.instance.gUIManager.labelTop.text = "CONNECTING...";
+		GlobalStuff.instance.gUIManager.labelBottom.text = "";
 		lat=RandomExt.RandomFloatBetween(-90,90);
 		lng=RandomExt.RandomFloatBetween(-180,180);
 		Debug.Log (lat);
@@ -22,7 +25,7 @@ public class GameDataLoader : MonoBehaviour {
 		WWW request = new WWW(url);
 		Debug.Log (request);
 		yield return request;
-		
+
 		if (request.error == null || request.error == "")
 		{
 			// {"coord":{"lon":"-94.61", "lat":"41.63"}
