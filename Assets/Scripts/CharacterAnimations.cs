@@ -10,18 +10,45 @@ public class CharacterAnimations : MonoBehaviour {
 	}
 
 	int fCounter = 0;
+	int attackingFramesCounter = 0;
 	void FixedUpdate(){
 		fCounter ++;
 
-		if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
-			if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
-				WalkH(characterProperties.horizontal);
-			} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
-				WalkV(characterProperties.vertical);
+		if(!characterProperties.attacking){
+			attackingFramesCounter = 0;
+
+			if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
+				if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
+					WalkH(characterProperties.horizontal);
+				} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
+					WalkV(characterProperties.vertical);
+				}
+			} else {
+				StopAnimation();
 			}
+		} else {
+			AttackingAnimations();
 		}
 	}
 
+	/*
+	 * STOP
+	 * */
+	void StopAnimation(){
+		
+		if(characterProperties.looking == CharacterProperties.Looking.up){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(10).ToString());
+		}
+		else if(characterProperties.looking == CharacterProperties.Looking.right){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(7).ToString());
+		}
+		else if(characterProperties.looking == CharacterProperties.Looking.down){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(1).ToString());
+		}
+		else if(characterProperties.looking == CharacterProperties.Looking.left){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(4).ToString());
+		}
+	}
 
 	/**ATTACK
 	 * 12 13 14 down
@@ -30,6 +57,33 @@ public class CharacterAnimations : MonoBehaviour {
 	 * 21 22 23 up
 	 * */
 
+	int animationFrames = 0;
+	void AttackingAnimations(){
+
+		if(characterProperties.looking == CharacterProperties.Looking.up){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(21 + animationFrames).ToString());
+		}
+		else if(characterProperties.looking == CharacterProperties.Looking.right){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(18 + animationFrames).ToString());
+		}
+		else if(characterProperties.looking == CharacterProperties.Looking.down){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(12 + animationFrames).ToString());
+		}
+		else if(characterProperties.looking == CharacterProperties.Looking.left){
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(15 + animationFrames).ToString());
+		}
+
+		if((attackingFramesCounter % 5) == 0){
+			animationFrames++;
+			if(animationFrames == 3){
+				animationFrames = 0;
+				characterProperties.attacking = false;
+			}
+		}
+		attackingFramesCounter ++;
+
+
+	}
 
 
 
@@ -41,21 +95,21 @@ public class CharacterAnimations : MonoBehaviour {
 		9 10 11 up
 	 */
 
-	int offsetH = 0;
+	int offset = 0;
 
 	void WalkH(float speed){
 		int v = 10 - (int)(Mathf.Abs(speed*6));
 
 		if(speed > 0){
 			characterProperties.looking = CharacterProperties.Looking.right;
-			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(8 - offsetH).ToString());
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(8 - offset).ToString());
 		} else {
 			characterProperties.looking = CharacterProperties.Looking.left;
-			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(5 - offsetH).ToString());
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(5 - offset).ToString());
 		}
 
 		if((fCounter % v) == 0){
-			offsetH = (offsetH + 1 == 3) ? 0 : offsetH + 1;
+			offset = (offset + 1 == 3) ? 0 : offset + 1;
 		}
 	}
 	void WalkV(float speed){
@@ -63,14 +117,14 @@ public class CharacterAnimations : MonoBehaviour {
 		
 		if(speed > 0){
 			characterProperties.looking = CharacterProperties.Looking.up;
-			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(11 - offsetH).ToString());
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(11 - offset).ToString());
 		} else {
 			characterProperties.looking = CharacterProperties.Looking.down;
-			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(2 - offsetH).ToString());
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(2 - offset).ToString());
 		}
 		
 		if((fCounter % v) == 0){
-			offsetH = (offsetH + 1 == 3) ? 0 : offsetH + 1;
+			offset = (offset + 1 == 3) ? 0 : offset + 1;
 		}
 	}
 }

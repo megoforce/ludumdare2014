@@ -8,6 +8,8 @@ public class CharacterMotor : MonoBehaviour {
 	public AttackingTrigger right;
 	public AttackingTrigger up;
 	public AttackingTrigger down;
+	public ParticleSystem attackExplosion;
+
 
 	float ampVelocity = 70f;
 	Transform myTransform;
@@ -19,6 +21,7 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform = transform;
 		characterProperties = GetComponent<CharacterProperties>();
 		myTransform.position = new Vector3(20,20,myTransform.position.z);
+
 	}
 	void FixedUpdate () {
 
@@ -27,9 +30,7 @@ public class CharacterMotor : MonoBehaviour {
 			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
 			characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
 			if(inputDevice.Action1.IsPressed && !characterProperties.attacking)
-				StartCoroutine(Attacking());
-
-
+				characterProperties.attacking = true;
 		} 
 		Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;
 
@@ -47,6 +48,7 @@ public class CharacterMotor : MonoBehaviour {
 		if(characterProperties.looking == CharacterProperties.Looking.up){
 			foreach(GameObject damagedObject in up.inColliderObjects){
 				damagedObject.BroadcastMessage("Damage");
+				Instantiate(attackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
 			}
@@ -55,6 +57,7 @@ public class CharacterMotor : MonoBehaviour {
 		else if(characterProperties.looking == CharacterProperties.Looking.right){
 			foreach(GameObject damagedObject in right.inColliderObjects){
 				damagedObject.BroadcastMessage("Damage");
+				Instantiate(attackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
 			}
@@ -63,6 +66,7 @@ public class CharacterMotor : MonoBehaviour {
 		else if(characterProperties.looking == CharacterProperties.Looking.down){
 			foreach(GameObject damagedObject in down.inColliderObjects){
 				damagedObject.BroadcastMessage("Damage");
+				Instantiate(attackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
 			}
@@ -71,6 +75,8 @@ public class CharacterMotor : MonoBehaviour {
 		else if(characterProperties.looking == CharacterProperties.Looking.left){
 			foreach(GameObject damagedObject in left.inColliderObjects){
 				damagedObject.BroadcastMessage("Damage");
+				Instantiate(attackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
+
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
 			}
@@ -78,11 +84,7 @@ public class CharacterMotor : MonoBehaviour {
 	}
 
 
-	IEnumerator Attacking(){
-		characterProperties.attacking = true;
-		yield return new WaitForSeconds(.4f);
-		characterProperties.attacking = false;
-	}
+
 }
 
 
