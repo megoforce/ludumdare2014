@@ -4,6 +4,12 @@ using System.Collections;
 public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
 	public CameraFilterPack_Colors_HUE_Rotate hueCamera;
+	void Start() {
+
+		tileMap.width=256;
+		tileMap.height=256;
+	}
+
 
 	public void GenerateWorld(float temperature, float humidity, float pressure, string skyname,float lat, float lng){
 		
