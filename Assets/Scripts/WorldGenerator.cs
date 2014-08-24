@@ -78,7 +78,19 @@ public class WorldGenerator : MonoBehaviour {
 			}
 		}
 
+		// add shadows
+		for (int x = 0; x < tileMap.width; x++) {
+				for (int y = 0; y < tileMap.width; y++) {
+						int tileid = tileMap.GetTile (x, y, 5);
+						if (tileid == 28 && y<tileMap.height && x<tileMap.width && y>1 && x>1) {
+							Debug.Log("adding shadow to "+x.ToString()+" "+y.ToString());
+							tileMap.Layers[6].SetTile(x+1,y-1,41);
+							tileMap.Layers[6].SetTile(x,y-1,40);
+							tileMap.Layers[6].SetTile(x-1,y-1,39);
 
+				}
+			}
+		}
 		
 		tileMap.ForceBuild();
 
