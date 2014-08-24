@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 16e0cf5aecccc4ff287bf1de52efbb72
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: atlas0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
