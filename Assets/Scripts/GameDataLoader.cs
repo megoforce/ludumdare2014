@@ -57,7 +57,11 @@ public class GameDataLoader : MonoBehaviour {
 			
 
 			var N = JSON.Parse(request.text);
-			
+			if(N["cod"] == "404"){
+				PlayerPrefs.SetFloat("lat",RandomExt.RandomFloatBetween(-90,90));
+				PlayerPrefs.SetFloat("lng",RandomExt.RandomFloatBetween(-180,180));
+				Application.LoadLevel("home");
+			}
 			Debug.Log(N);
 			country=N["sys"]["country"].Value;
 			temperature=float.Parse(N["main"]["temp"].Value);

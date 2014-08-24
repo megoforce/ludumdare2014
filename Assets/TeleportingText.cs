@@ -17,6 +17,7 @@ public class TeleportingText : MonoBehaviour {
 	}
 
 	public void Cancel(){
+		cameraFX.enabled = false;
 		StopAllCoroutines();
 		Destroy(gameObject);
 	}
@@ -47,7 +48,25 @@ public class TeleportingText : MonoBehaviour {
 				lat -= 10;
 			}
 			PlayerPrefs.SetFloat("lat",lat);
+		} else if(direction == "WEST"){
+			float lng = PlayerPrefs.GetFloat("lng");
+			if(lng-10 < -180){
+				lng += 350;
+			} else {
+				lng -= 10;
+			}
+			PlayerPrefs.SetFloat("lng",lng);
+		} else if(direction == "EAST"){
+
+			float lng = PlayerPrefs.GetFloat("lng");
+			if(lng+10 > 180){
+				lng -= 350;
+			} else {
+				lng += 10;
+			}
+			PlayerPrefs.SetFloat("lng",lng);
 		}
+
 
 		 
 

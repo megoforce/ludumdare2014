@@ -25,7 +25,7 @@ public class CharacterMotor : MonoBehaviour {
 	void Awake(){
 		myTransform = transform;
 		characterProperties = GetComponent<CharacterProperties>();
-		myTransform.position = new Vector3(20,20,myTransform.position.z);
+		myTransform.position = new Vector3(40,40,myTransform.position.z);
 		armor=99;
 		alive=true;
 		if(characterProperties.AI==false) {
@@ -40,12 +40,16 @@ public class CharacterMotor : MonoBehaviour {
 
 		if(!characterProperties.AI){
 			// current tile
-			int x = (int)transform.position.x;
-			int y = (int)transform.position.y;
+			int x = (int)(transform.position.x*(256f/82f));
+			int y = (int)(transform.position.y*(256f/82f));
+
 			x=x+1;
 			y=y+1;
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
-				Debug.Log ("x:"+x.ToString()+" y:"+y.ToString()+" tile:"+tileMap.GetTile(x,y,1).ToString());
+				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
+				if(tileMap.GetTile(x,y,1) == 7){
+					print("health!");
+				}
 			}
 			InputDevice inputDevice = InputManager.ActiveDevice;
 			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
@@ -64,7 +68,7 @@ public class CharacterMotor : MonoBehaviour {
 			CheckForAttacking();
 		if (characterProperties.AI == false) {
 			int x = (int)transform.position.x;
-			Debug.Log (x);
+//			Debug.Log (x);
 		}
 
 	}

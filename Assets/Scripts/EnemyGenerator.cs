@@ -12,7 +12,7 @@ public class EnemyGenerator : MonoBehaviour {
 			cp.armor=Random.Range(1,level);
 
 			cp.Init(true);
-			newEnemy.transform.position = new Vector3(RandomExt.RandomFloatBetween(0,10),RandomExt.RandomFloatBetween(0,10),0);
+			newEnemy.transform.position = new Vector3(RandomExt.RandomFloatBetween(0,80),RandomExt.RandomFloatBetween(0,80),0);
 		}
 	}
 }

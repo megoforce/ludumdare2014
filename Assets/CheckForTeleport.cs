@@ -20,17 +20,30 @@ public class CheckForTeleport : MonoBehaviour {
 	IEnumerator CheckForTeleporting(){
 		while(true){
 			if(!teleporting){
-				if(myTransofrm.position.y > 30f){
+				if(myTransofrm.position.y > 80f-15f){ //NORTH
 					teleporting = true;
 					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
 					teleportingInstance.GetComponent<TeleportingText>().Teleporting("NORTH");
+				} else if(myTransofrm.position.y < 15f){ //SOUTH
+					teleporting = true;
+					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting("SOUTH");
+				} else if(myTransofrm.position.x < 15f){ //WEST
+					teleporting = true;
+					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting("WEST");
+				} else if(myTransofrm.position.x > 80f-15f){ //EAST
+					teleporting = true;
+					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting("EAST");
 				}
-
-				
 			} else {
-
+				if(myTransofrm.position.y < 80f-15f && myTransofrm.position.y > 15f && myTransofrm.position.x > 15f && myTransofrm.position.x < 80f-15f){ 
+					teleporting = false;
+					teleportingInstance.GetComponent<TeleportingText>().Cancel();
+				}
 			}
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds(.5f);
 		}
 	}
 
