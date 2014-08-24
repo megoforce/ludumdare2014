@@ -4,10 +4,10 @@ using System;
 using InControl;
 
 public class CharacterMotor : MonoBehaviour {
-	public Collider left;
-	public Collider right;
-	public Collider up;
-	public Collider down;
+	public AttackingTrigger left;
+	public AttackingTrigger right;
+	public AttackingTrigger up;
+	public AttackingTrigger down;
 
 	float ampVelocity = 70f;
 	Transform myTransform;
@@ -37,10 +37,44 @@ public class CharacterMotor : MonoBehaviour {
 			f*=.8f;
 
 		myRigidbody.AddForce(f);
+
+		if(characterProperties.attacking)
+			CheckForAttacking();
 	}
 
 	void CheckForAttacking(){
-
+		//Up
+		if(characterProperties.looking == CharacterProperties.Looking.up){
+			foreach(GameObject damagedObject in up.inColliderObjects){
+				damagedObject.BroadcastMessage("Damage");
+				Vector3 delta = damagedObject.transform.position - myTransform.position;
+				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
+			}
+		}
+		//Right
+		else if(characterProperties.looking == CharacterProperties.Looking.right){
+			foreach(GameObject damagedObject in right.inColliderObjects){
+				damagedObject.BroadcastMessage("Damage");
+				Vector3 delta = damagedObject.transform.position - myTransform.position;
+				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
+			}
+		}
+		//Down
+		else if(characterProperties.looking == CharacterProperties.Looking.down){
+			foreach(GameObject damagedObject in down.inColliderObjects){
+				damagedObject.BroadcastMessage("Damage");
+				Vector3 delta = damagedObject.transform.position - myTransform.position;
+				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
+			}
+		}
+		//Left
+		else if(characterProperties.looking == CharacterProperties.Looking.left){
+			foreach(GameObject damagedObject in left.inColliderObjects){
+				damagedObject.BroadcastMessage("Damage");
+				Vector3 delta = damagedObject.transform.position - myTransform.position;
+				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
+			}
+		}
 	}
 
 

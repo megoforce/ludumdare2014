@@ -20,7 +20,20 @@ public class CharacterAnimations : MonoBehaviour {
 			}
 		}
 	}
-	/*
+
+
+	/**ATTACK
+	 * 12 13 14 down
+	 * 15 16 17 left
+	 * 18 19 20 right
+	 * 21 22 23 up
+	 * */
+
+
+
+
+
+	/*	WALK
 		0 1 2 down
 		3 4 5 left
 		6 7 8 right

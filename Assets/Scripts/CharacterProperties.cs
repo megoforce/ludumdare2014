@@ -10,11 +10,15 @@ public class CharacterProperties : MonoBehaviour {
 	public bool attacking = false;
 	public enum Looking{up,right,left,down};
 	public Looking looking = Looking.down;
-
+	CharacterAnimations characterAnimations;
 	public void Init(bool enemy){
 		AI = enemy;
 		spriteName = (enemy) ? "enemy" : "player";
-		CharacterAnimations ca = GetComponent<CharacterAnimations>();
-		ca.sprite.spriteId = ca.sprite.GetSpriteIdByName(spriteName+"/1");
+		characterAnimations = GetComponent<CharacterAnimations>();
+		characterAnimations.sprite.spriteId = characterAnimations.sprite.GetSpriteIdByName(spriteName+"/1");
+		tag = (enemy) ? "NotPlayer" : "Player";
+		characterAnimations.sprite.gameObject.tag = (enemy) ? "NotPlayerSprite" : "PlayerSprite";
 	}
+
+
 }

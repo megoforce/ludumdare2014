@@ -10,8 +10,8 @@ public class AttackingTrigger : MonoBehaviour {
 		characterProperties = transform.parent.parent.GetComponent<CharacterProperties>();
 	}
 	void OnTriggerEnter(Collider other){
+
 		if(characterProperties.spriteName == "player" && other.tag == "NotPlayer"){
-			print("enemy in range!");
 			inColliderObjects.Add(other.gameObject);
 		}
 		if(characterProperties.spriteName == "enemy" && other.tag == "Player"){
