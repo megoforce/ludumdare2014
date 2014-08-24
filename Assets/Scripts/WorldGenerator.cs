@@ -16,14 +16,12 @@ public class WorldGenerator : MonoBehaviour {
 				}
 				// muy humedo
 				if(Random.Range(0,128)<humidity) {
-					if((Random.Range(0,128)<temperature) && temperature>0) {
+					if((Random.Range(0,128)<temperature) && temperature>8) {
 						tileMap.Layers[1].SetTile(i,j,7);
-					} else if(Random.Range(0,16)==1 && temperature>0) {
+					} else if(Random.Range(0,16)==1 && temperature>4) {
 						tileMap.Layers[1].SetTile(i,j,13);
 					}
-				}
-				// muy seco
-				if(Random.Range(0,humidity/2)==1) {
+				} else if(Random.Range(0,16)==1 && temperature>0) {
 					// piedras
 					tileMap.Layers[1].SetTile(i,j,1);
 					if(Random.Range(0,4)==1 && temperature>4) {
