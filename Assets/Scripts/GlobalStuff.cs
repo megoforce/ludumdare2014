@@ -5,7 +5,7 @@ public class GlobalStuff : MonoBehaviour {
 	public static GlobalStuff instance = null;
 	public GameObject player;
 	public GUIManager gUIManager;
-
+	public EnemyGenerator enemyGenerator;
 
 	void Awake(){
 		if(instance == null){
