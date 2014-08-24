@@ -70,7 +70,7 @@ public class CharacterMotor : MonoBehaviour {
 			if(characterProperties.AI==false) {
 				RefreshStatusMessage();
 			}
-			Debug.Log("d: "+damage.ToString()+" fd:"+finaldamage.ToString());
+//			Debug.Log("d: "+damage.ToString()+" fd:"+finaldamage.ToString());
 			if(characterProperties.health<1) Die();
 			
 		}

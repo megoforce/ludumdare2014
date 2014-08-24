@@ -15,16 +15,24 @@ public class GameDataLoader : MonoBehaviour {
 	public float humidity;
 	public float pressure;
 	public float weather;
+	public float wind;
 
 	void Start() {
-		GlobalStuff.instance.gUIManager.labelBottom.text = "Searching for weather data...";
-		GlobalStuff.instance.lat=RandomExt.RandomFloatBetween(-90,90); //-90 90
-		GlobalStuff.instance.lng=RandomExt.RandomFloatBetween(-180,180); //-180 180
+
+		if(!PlayerPrefs.HasKey("lat") || !PlayerPrefs.HasKey("lng")){
+			print("reset lat lng");
+			PlayerPrefs.SetFloat("lat",RandomExt.RandomFloatBetween(-90,90));
+			PlayerPrefs.SetFloat("lng",RandomExt.RandomFloatBetween(-180,180));
+
+		}
+		GlobalStuff.instance.lat = PlayerPrefs.GetFloat("lat");
+		GlobalStuff.instance.lng = PlayerPrefs.GetFloat("lng");
+
 		StartCoroutine(SearchWeatherData());
 	}
 	IEnumerator SearchWeatherData() {
-		GlobalStuff.instance.gUIManager.labelTop.text = "CONNECTING...";
-		GlobalStuff.instance.gUIManager.labelBottom.text = "";
+		GlobalStuff.instance.gUIManager.label1.text = "CONNECTING... [LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"]";
+		GlobalStuff.instance.gUIManager.label2.text = "Searching for weather data...";
 
 		Debug.Log (GlobalStuff.instance.lat);
 		string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + GlobalStuff.instance.lat.ToString () + "&lon=" + GlobalStuff.instance.lng.ToString ()+"&units=metric";
@@ -47,7 +55,7 @@ public class GameDataLoader : MonoBehaviour {
 			// "name":"Guthrie Center"
 			// "cod":"200"}
 			
-			
+
 			var N = JSON.Parse(request.text);
 			
 			Debug.Log(N);
@@ -55,15 +63,15 @@ public class GameDataLoader : MonoBehaviour {
 			temperature=float.Parse(N["main"]["temp"].Value);
 			humidity=float.Parse(N["main"]["humidity"].Value);
 			pressure=float.Parse(N["main"]["pressure"].Value);
-			
+			wind = float.Parse(N["wind"]["speed"].Value);
 			weatherName=N["name"];
 			Debug.Log(N["weather"][0]["id"].Value);
 			
 			weather=float.Parse(N["weather"][0]["id"].Value);
 			skyname=N["weather"][0]["main"].Value;
 			
-			GlobalStuff.instance.gUIManager.labelTop.text = ""+GlobalStuff.instance.lat.ToString()+","+GlobalStuff.instance.lng.ToString()+" "+weatherName.ToUpper()+", "+country;
-			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
+			GlobalStuff.instance.gUIManager.label1.text = "[LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"] "+weatherName.ToUpper()+", "+country.ToUpper();
+			GlobalStuff.instance.gUIManager.label2.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper() + " WIND:" + wind.ToString();
 			
 			StartCoroutine(GlitchesOff());
 			GlobalStuff.instance.enemyGenerator.GenerateEnemies();
