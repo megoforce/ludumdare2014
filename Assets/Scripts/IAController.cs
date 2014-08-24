@@ -14,6 +14,8 @@ public class IAController : MonoBehaviour {
 
 	void FixedUpdate () {
 		if(characterProperties.AI){
+
+			//MOVE
 			float deltaX = playerTransform.position.x - myTransform.position.x;
 			float deltaY = playerTransform.position.y - myTransform.position.y;
 
@@ -32,6 +34,13 @@ public class IAController : MonoBehaviour {
 			} else {
 				characterProperties.vertical = 0;
 			}
+
+
+			//ATTACK
+			float d = Vector3.Distance(GlobalStuff.instance.player.transform.position,myTransform.position);
+
+			if(d < .5f && !characterProperties.attacking)
+				characterProperties.attacking = true;
 		}
 	}
 }
