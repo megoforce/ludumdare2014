@@ -12,7 +12,7 @@ public class WorldGenerator : MonoBehaviour {
 			for(int j = 0; j < tileMap.height;j++){
 				tileMap.Layers[0].SetTile(i,j,floorTileId);
 				if(Random.Range(0,300)>200) {
-					tileMap.Layers[1].SetTile(i,j,Random.Range(1,10));
+					tileMap.Layers[1].SetTile(i,j,0);
 				}
 			}
 		}
@@ -32,9 +32,9 @@ public class WorldGenerator : MonoBehaviour {
 		for(int x = 0; x < tileMap.width; x++){
 			for(int y = 0; y < tileMap.width; y++){
 				if(Mathf.PerlinNoise(x*.07f,y*.07f) < .3f){
-					tileMap.Layers[5].SetTile(x,y,41);
+					tileMap.Layers[5].SetTile(x,y,10);
 					if(tileMap.GetTile(x-1,y,5) <0 && tileMap.GetTile(x,y-1,5)<0) {
-						tileMap.Layers[5].SetTile(x,y,32);
+						tileMap.Layers[5].SetTile(x,y,22);
 					} 
 
 
@@ -48,8 +48,8 @@ public class WorldGenerator : MonoBehaviour {
 				if(tileid>0 && y>1 && y<tileMap.height) {
 					Debug.Log(tileid);
 					if(tileMap.GetTile(x,y-1,5)<0) {
-						tileMap.Layers[5].SetTile(x,y-1,43);
-						tileMap.Layers[5].SetTile(x,y-2,45);
+						tileMap.Layers[5].SetTile(x,y-1,22);
+						tileMap.Layers[5].SetTile(x,y-2,28);
 					
 
 					}
@@ -61,30 +61,11 @@ public class WorldGenerator : MonoBehaviour {
 		for(int x = 0; x < tileMap.width; x++){
 			for(int y = 0; y < tileMap.width; y++){
 				int tileid=tileMap.GetTile(x,y,5);
-				if(y>1 && y<tileMap.height) {
-					if(tileid==41) {
-						// top
-						if(tileMap.GetTile(x-1,y,5)<0 && tileMap.GetTile(x,y+1,5)<0) {
-							tileMap.Layers[5].SetTile(x,y,30);
-						}
-					}
-					if(tileid==43) {
-						// middle
-						if(tileMap.GetTile(x-1,y,5)<0) {
-							tileMap.Layers[5].SetTile(x,y,33);
-							tileMap.Layers[5].SetTile(x,y+1,32);
-
-						} else if(tileMap.GetTile(x+1,y,5)<0) {
-							tileMap.Layers[5].SetTile(x,y,54);
-						}
-					}
-					if(tileid==45) {
-						// bottom
-						if(tileMap.GetTile(x-1,y,5)<0) {
-							tileMap.Layers[5].SetTile(x,y,35);
-						} else if(tileMap.GetTile(x+1,y,5)<0) {
-							tileMap.Layers[5].SetTile(x,y,55);
-						}
+				if(tileid==10) {
+					Debug.Log ("x: "+x.ToString()+" y:"+y.ToString());
+					// top
+					if(x>0 && tileMap.GetTile(x-1,y,5)<0) {
+						tileMap.Layers[5].SetTile(x,y,3);
 					}
 				}
 
