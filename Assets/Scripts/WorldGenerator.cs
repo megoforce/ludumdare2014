@@ -22,13 +22,18 @@ public class WorldGenerator : MonoBehaviour {
 					} else if(Random.Range(0,16)==1 && temperature>4) {
 						tileMap.Layers[1].SetTile(i,j,13);
 					}
-				} else if(Random.Range(0,16)==1 && temperature>0) {
+				} else if(Random.Range(0,6)==1 && temperature>0) {
 					// piedras
 					tileMap.Layers[1].SetTile(i,j,1);
+
 					if(Random.Range(0,4)==1 && temperature>4) {
 						tileMap.Layers[1].SetTile(i,j,1);
 					} else if(Random.Range(0,2)==1 && temperature>8) {
 						tileMap.Layers[1].SetTile(i,j,14);
+					} else if(humidity<20) {
+						tileMap.Layers[1].SetTile(i,j,2);
+					} else {
+						tileMap.Layers[1].SetTile(i,j,25);
 					}
 				}
 
