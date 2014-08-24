@@ -45,7 +45,7 @@ public class CharacterMotor : MonoBehaviour {
 			x=x+1;
 			y=y+1;
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
-				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
+//				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
 				int currentTile = tileMap.GetTile(x,y,1);
 				if(currentTile == 7 || currentTile == 13){ //helath
 					GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
