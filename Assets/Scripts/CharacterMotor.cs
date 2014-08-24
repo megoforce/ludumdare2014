@@ -77,7 +77,7 @@ public class CharacterMotor : MonoBehaviour {
 
 	}
 	void RefreshStatusMessage() {
-		GlobalStuff.instance.gUIManager.statusLabel.text="HEALTH:"+characterProperties.health.ToString()+" ARMOR:"+characterProperties.armor.ToString()+" KEYS:0/64";
+		GlobalStuff.instance.gUIManager.hp.text="HEALTH:"+characterProperties.health.ToString()+" ARMOR:"+characterProperties.armor.ToString()+" KEYS:0/64";
 	}
 	void Die() {
 		characterProperties.alive=false;

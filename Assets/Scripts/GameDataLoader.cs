@@ -7,8 +7,7 @@ public class GameDataLoader : MonoBehaviour {
 	public bool forceReset = false;
 	public WorldGenerator worldGenerator;
 
-	public float lat;
-	public float lng;
+
 	public string country;
 	string weatherName;
 	public string skyname;
@@ -18,19 +17,17 @@ public class GameDataLoader : MonoBehaviour {
 	public float weather;
 
 	void Start() {
-		Debug.Log ("Searching for weather data...");
-		lat=RandomExt.RandomFloatBetween(-90,90);
-		lng=RandomExt.RandomFloatBetween(-180,180);
+		GlobalStuff.instance.gUIManager.labelBottom.text = "Searching for weather data...";
+		GlobalStuff.instance.lat=RandomExt.RandomFloatBetween(-90,90); //-90 90
+		GlobalStuff.instance.lng=RandomExt.RandomFloatBetween(-180,180); //-180 180
 		StartCoroutine(SearchWeatherData());
-
-
 	}
 	IEnumerator SearchWeatherData() {
 		GlobalStuff.instance.gUIManager.labelTop.text = "CONNECTING...";
 		GlobalStuff.instance.gUIManager.labelBottom.text = "";
 
-		Debug.Log (lat);
-		string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat.ToString () + "&lon=" + lng.ToString ()+"&units=metric";
+		Debug.Log (GlobalStuff.instance.lat);
+		string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + GlobalStuff.instance.lat.ToString () + "&lon=" + GlobalStuff.instance.lng.ToString ()+"&units=metric";
 		Debug.Log(url);
 		WWW request = new WWW(url);
 		Debug.Log (request);
@@ -65,7 +62,7 @@ public class GameDataLoader : MonoBehaviour {
 			weather=float.Parse(N["weather"][0]["id"].Value);
 			skyname=N["weather"][0]["main"].Value;
 			
-			GlobalStuff.instance.gUIManager.labelTop.text = ""+lat.ToString()+","+lng.ToString()+" "+weatherName.ToUpper()+", "+country;
+			GlobalStuff.instance.gUIManager.labelTop.text = ""+GlobalStuff.instance.lat.ToString()+","+GlobalStuff.instance.lng.ToString()+" "+weatherName.ToUpper()+", "+country;
 			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
 			
 			StartCoroutine(GlitchesOff());
@@ -95,7 +92,7 @@ public class GameDataLoader : MonoBehaviour {
 	IEnumerator GlitchesOff(){
 		GlobalStuff.instance.gUIManager.glitchEffect.enabled = false;
 		yield return new WaitForSeconds(1f);
-		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,lat,lng);
+		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
 	}
 }
