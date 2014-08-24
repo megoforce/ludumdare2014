@@ -44,8 +44,9 @@ public class CharacterMotor : MonoBehaviour {
 			int y = (int)transform.position.y;
 			x=x+1;
 			y=y+1;
-			Debug.Log ("x:"+x.ToString()+" y:"+y.ToString()+" tile:"+tileMap.GetTile(x,y,1).ToString());
-
+			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
+				Debug.Log ("x:"+x.ToString()+" y:"+y.ToString()+" tile:"+tileMap.GetTile(x,y,1).ToString());
+			}
 			InputDevice inputDevice = InputManager.ActiveDevice;
 			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
 			characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
@@ -82,7 +83,7 @@ public class CharacterMotor : MonoBehaviour {
 			if(characterProperties.AI==false) {
 				RefreshStatusMessage();
 			}
-			Debug.Log("d: "+damage.ToString()+" fd:"+finaldamage.ToString());
+//			Debug.Log("d: "+damage.ToString()+" fd:"+finaldamage.ToString());
 			if(characterProperties.health<1) Die();
 			
 		}

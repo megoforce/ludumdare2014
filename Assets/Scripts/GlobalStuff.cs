@@ -7,8 +7,8 @@ public class GlobalStuff : MonoBehaviour {
 	public GUIManager gUIManager;
 	public EnemyGenerator enemyGenerator;
 	public WorldGenerator worldGenerator;
-	public float lat;
-	public float lng;
+	public float lat = 0;
+	public float lng = 0;
 
 	void Awake(){
 		if(instance == null){

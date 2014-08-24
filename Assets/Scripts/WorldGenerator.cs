@@ -45,7 +45,7 @@ public class WorldGenerator : MonoBehaviour {
 
 			}
 		}
-		
+		/*
 		//World Borders
 		int borderTileId = 10;
 		for(int x = 0;x < tileMap.width;x++){
@@ -55,7 +55,7 @@ public class WorldGenerator : MonoBehaviour {
 		for(int y = 0;y < tileMap.height;y++){
 			tileMap.Layers[5].SetTile(0,y,borderTileId);
 			tileMap.Layers[5].SetTile(tileMap.width-1,y,borderTileId);
-		}
+		}*/
 		
 		//Perlin noise mesetas
 		for(int x = 0; x < tileMap.width; x++){
@@ -88,8 +88,8 @@ public class WorldGenerator : MonoBehaviour {
 		for (int x = 0; x < tileMap.width; x++) {
 				for (int y = 0; y < tileMap.width; y++) {
 						int tileid = tileMap.GetTile (x, y, 5);
-						if (tileid == 28 && y<tileMap.height && x<tileMap.width && y>1 && x>1) {
-							Debug.Log("adding shadow to "+x.ToString()+" "+y.ToString());
+						if (tileid == 28 && y<(tileMap.height-1) && x<(tileMap.width-1) && y>1 && x>1) {
+							//Debug.Log("adding shadow to "+x.ToString()+" "+y.ToString());
 							if(tileMap.GetTile (x+1, y, 5)<0) tileMap.Layers[5].SetTile(x+1,y,40);
 							if(tileMap.GetTile (x+1, y-1, 5)<0) tileMap.Layers[5].SetTile(x+1,y-1,40);
 							if(tileMap.GetTile (x+1, y+1, 5)<0) tileMap.Layers[5].SetTile(x+1,y+1,40);

@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class GUIManager : MonoBehaviour {
-	public UILabel labelTop;
-	public UILabel labelBottom;
+	public UILabel label1;
+	public UILabel label2;
 	public UILabel hp;
 	public UILabel armor;
 	public UILabel keys;
