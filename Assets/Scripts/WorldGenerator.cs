@@ -13,12 +13,14 @@ public class WorldGenerator : MonoBehaviour {
 				tileMap.Layers[0].SetTile(i,j,floorTileId);
 				if(Random.Range(0,300)>200) {
 					tileMap.Layers[1].SetTile(i,j,0);
-					if(Random.Range(0,humidity)>50) {
+					if(Random.Range(0,humidity)>64) {
 						tileMap.Layers[1].SetTile(i,j,7);
 					} 
-					if(Random.Range(0,humidity)<50) {
+					if(Random.Range(0,humidity)<32) {
 						tileMap.Layers[1].SetTile(i,j,1);
-					} 
+					} else if (Random.Range(0,humidity)<10) {
+						tileMap.Layers[1].SetTile(i,j,14);
+					}
 
 
 				}
