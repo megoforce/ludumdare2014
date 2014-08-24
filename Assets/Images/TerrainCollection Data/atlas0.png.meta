@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 16e0cf5aecccc4ff287bf1de52efbb72
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: atlas0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -36,7 +38,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings:
   - buildTarget: iPhone

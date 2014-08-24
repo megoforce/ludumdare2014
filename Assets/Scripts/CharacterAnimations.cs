@@ -6,6 +6,7 @@ public class CharacterAnimations : MonoBehaviour {
 	CharacterProperties characterProperties;
 	void Awake(){
 		characterProperties = GetComponent<CharacterProperties>();
+		sprite.SortingOrder = 10;
 	}
 
 	int fCounter = 0;
