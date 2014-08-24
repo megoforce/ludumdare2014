@@ -78,7 +78,7 @@ public class GameDataLoader : MonoBehaviour {
 			GlobalStuff.instance.gUIManager.label2.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper() + " WIND:" + wind.ToString();
 			
 			StartCoroutine(GlitchesOff());
-			GlobalStuff.instance.enemyGenerator.GenerateEnemies();
+
 			
 			
 			
@@ -104,8 +104,10 @@ public class GameDataLoader : MonoBehaviour {
 	IEnumerator GlitchesOff(){
 		GlobalStuff.instance.gUIManager.glitchEffect.enabled = false;
 		yield return new WaitForSeconds(1f);
+		GlobalStuff.instance.enemyGenerator.GenerateEnemies();
 		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
+
 	}
 }
 

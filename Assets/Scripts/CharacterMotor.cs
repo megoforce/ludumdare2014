@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 using InControl;
 
 public class CharacterMotor : MonoBehaviour {
@@ -10,8 +9,6 @@ public class CharacterMotor : MonoBehaviour {
 	public AttackingTrigger down;
 	public GameObject attackExplosionPlayer;
 	public GameObject attackExplosionEnemy;
-	public int health;
-	public int armor;
 	public bool alive;
 	public tk2dTileMap tileMap;
 	GameObject myAttackExplosion;
@@ -26,7 +23,6 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform = transform;
 		characterProperties = GetComponent<CharacterProperties>();
 		myTransform.position = new Vector3(41,41,myTransform.position.z);
-		armor=99;
 		alive=true;
 		if(characterProperties.AI==false) {
 			RefreshStatusMessage();
@@ -36,20 +32,42 @@ public class CharacterMotor : MonoBehaviour {
 		myAttackExplosion = (characterProperties.AI) ? attackExplosionEnemy : attackExplosionPlayer;
 
 	}
+
+	public GameObject healthPrefab;
+	public GameObject armorPrefab;
 	void FixedUpdate () {
 
 		if(!characterProperties.AI){
 			// current tile
-			int x = Mathf.RoundToInt(transform.position.x*(256f/82f));
-			int y = Mathf.RoundToInt(transform.position.y*(256f/82f));
+			int x = (int)(transform.position.x*(256f/82f));
+			int y = (int)(transform.position.y*(256f/82f));
 
 			x=x+1;
 			y=y+1;
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
 				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
-				if(tileMap.GetTile(x,y,1) == 7){
-					print("health!");
+				int currentTile = tileMap.GetTile(x,y,1);
+				if(currentTile == 7 || currentTile == 13){ //helath
+					GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
+					hp.transform.parent = myTransform;
+					if(Random.value < .5f){
+						characterProperties.health = (characterProperties.health+1 > 99) ? 99 : characterProperties.health+2;
+						PlayerPrefs.SetInt("health",characterProperties.health);
+						RefreshStatusMessage();
+					}
+				}else if(currentTile == 8 || currentTile == 1 || currentTile == 2){ //stone
+					GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
+					hp.transform.parent = myTransform;
+					if(Random.value < .5f){
+						characterProperties.armor = (characterProperties.armor+1 > 99) ? 99 : characterProperties.armor+2;
+						PlayerPrefs.SetInt("armor",characterProperties.armor);
+						RefreshStatusMessage();
+					}
 				}
+				//stones 8 1 2
+
+
+
 			}
 			InputDevice inputDevice = InputManager.ActiveDevice;
 			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
@@ -92,10 +110,20 @@ public class CharacterMotor : MonoBehaviour {
 
 	}
 	void RefreshStatusMessage() {
-		GlobalStuff.instance.gUIManager.hp.text="HEALTH:"+characterProperties.health.ToString()+" ARMOR:"+characterProperties.armor.ToString()+" KEYS:0/64";
+		PlayerPrefs.SetInt("hp",characterProperties.health);
+		PlayerPrefs.SetInt("armor",characterProperties.armor);
+
+		GlobalStuff.instance.gUIManager.hp.text=characterProperties.health.ToString();
+		GlobalStuff.instance.gUIManager.armor.text=characterProperties.armor.ToString();
+		GlobalStuff.instance.gUIManager.keys.text=PlayerPrefs.GetInt("keys").ToString() +"/5";
 	}
 	void Die() {
 		characterProperties.alive=false;
+		if(!characterProperties.AI){
+			GameDataLoader.ResetData();
+			Application.LoadLevel("home");
+		}
+
 	}
 	void CheckForAttacking(){
 		int damage=1;
