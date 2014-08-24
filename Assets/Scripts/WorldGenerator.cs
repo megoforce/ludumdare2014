@@ -84,14 +84,42 @@ public class WorldGenerator : MonoBehaviour {
 						int tileid = tileMap.GetTile (x, y, 5);
 						if (tileid == 28 && y<tileMap.height && x<tileMap.width && y>1 && x>1) {
 							Debug.Log("adding shadow to "+x.ToString()+" "+y.ToString());
-							tileMap.Layers[6].SetTile(x+1,y-1,41);
-							tileMap.Layers[6].SetTile(x,y-1,40);
-							tileMap.Layers[6].SetTile(x-1,y-1,39);
+							if(tileMap.GetTile (x+1, y, 5)<0) tileMap.Layers[5].SetTile(x+1,y,40);
+							if(tileMap.GetTile (x+1, y-1, 5)<0) tileMap.Layers[5].SetTile(x+1,y-1,40);
+							if(tileMap.GetTile (x+1, y+1, 5)<0) tileMap.Layers[5].SetTile(x+1,y+1,40);
+							
+					if(tileMap.GetTile (x, y-1, 5)<0 && tileMap.GetTile (x-1, y-1, 5)<0) {
+								tileMap.Layers[5].SetTile(x,y-1,39);
+							} else {
+								tileMap.Layers[5].SetTile(x,y-1,40);
+							}
+
+							if(tileMap.GetTile (x+1, y, 5)<0 && tileMap.GetTile (x+1, y-1, 5)<0 ) {
+								tileMap.Layers[5].SetTile(x+1,y-1,40);
+							} else if(tileMap.GetTile (x+1, y-1, 5)<0) {
+								tileMap.Layers[5].SetTile(x+1,y-1,40);
+							}
+							// tileMap.Layers[6].SetTile(x-1,y-1,39);
 
 				}
 			}
 		}
-		
+		// bottom shadows
+		for (int x = 0; x < tileMap.width; x++) {
+			for (int y = 0; y < tileMap.width; y++) {
+				int tileid = tileMap.GetTile (x, y, 5);
+				if (tileid == 10 && y<(tileMap.height-1) && x<(tileMap.width-1) && y>1 && x>1) {
+					if(tileMap.GetTile(x+1,y,5)<0) {
+						if(tileMap.GetTile(x,y+1,5)<0 || tileMap.GetTile(x,y+1,5)==41 || tileMap.GetTile(x,y+1,5)==40) {
+							tileMap.Layers[5].SetTile(x+1,y,41);
+
+						} else {
+							tileMap.Layers[5].SetTile(x+1,y,40);
+						}
+					}
+				}
+			}
+		}
 		tileMap.ForceBuild();
 
 		SetTemperatureColor(temperature);
