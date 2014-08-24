@@ -33,9 +33,7 @@ public class WorldGenerator : MonoBehaviour {
 			for(int y = 0; y < tileMap.width; y++){
 				if(Mathf.PerlinNoise(x*.07f,y*.07f) < .3f){
 					tileMap.Layers[5].SetTile(x,y,10);
-					if(tileMap.GetTile(x-1,y,5) <0 && tileMap.GetTile(x,y-1,5)<0) {
-						tileMap.Layers[5].SetTile(x,y,22);
-					} 
+
 
 
 				}
@@ -63,10 +61,26 @@ public class WorldGenerator : MonoBehaviour {
 				int tileid=tileMap.GetTile(x,y,5);
 				if(tileid==10) {
 					Debug.Log ("x: "+x.ToString()+" y:"+y.ToString());
-					// top
-					if(x>0 && tileMap.GetTile(x-1,y,5)<0) {
-						tileMap.Layers[5].SetTile(x,y,3);
+					if(x>0 && x<(tileMap.width-1) && y>0 && y<(tileMap.height-1) && y>0) {
+						// top-left
+						if(tileMap.GetTile(x-1,y,5)<0 && tileMap.GetTile(x,y+1,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,3);
+						}
+						// top-right
+						
+						if(tileMap.GetTile(x+1,y,5)<0 && tileMap.GetTile(x,y+1,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,5);
+						}
+						// bottom-right
+						if(tileMap.GetTile(x,y-1,5)==22 && (tileMap.GetTile(x+1,y,5)<0||tileMap.GetTile(x+1,y,5)==22||tileMap.GetTile(x+1,y,5)==28)) {
+							tileMap.Layers[5].SetTile(x,y,17);
+						}
+						// bottom-left
+						if((tileMap.GetTile(x-1,y,5)<0||tileMap.GetTile(x-1,y,5)==22||tileMap.GetTile(x-1,y,5)==28) && tileMap.GetTile(x,y-1,5)==22) {
+							tileMap.Layers[5].SetTile(x,y,15);
+						}
 					}
+
 				}
 
 			}
