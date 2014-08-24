@@ -10,6 +10,9 @@ public class CharacterMotor : MonoBehaviour {
 	public AttackingTrigger down;
 	public GameObject attackExplosionPlayer;
 	public GameObject attackExplosionEnemy;
+	public int health;
+	public int armor;
+	public bool alive;
 	GameObject myAttackExplosion;
 
 	float ampVelocity = 70f;
@@ -22,7 +25,8 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform = transform;
 		characterProperties = GetComponent<CharacterProperties>();
 		myTransform.position = new Vector3(20,20,myTransform.position.z);
-
+		armor=99;
+		alive=true;
 	}
 	void Start(){
 		myAttackExplosion = (characterProperties.AI) ? attackExplosionEnemy : attackExplosionPlayer;
@@ -46,13 +50,25 @@ public class CharacterMotor : MonoBehaviour {
 
 		if(characterProperties.attacking)
 			CheckForAttacking();
-	}
 
+	}
+	void Damage(float damage) {
+		if(characterProperties.alive==true) {
+			print(health);
+			health=health-(int)damage;
+			if(health<1) Die();
+		}
+
+	}
+	void Die() {
+		characterProperties.alive=false;
+	}
 	void CheckForAttacking(){
+		int damage=1;
 		//Up
 		if(characterProperties.looking == CharacterProperties.Looking.up){
 			foreach(GameObject damagedObject in up.inColliderObjects){
-				damagedObject.BroadcastMessage("Damage");
+				damagedObject.BroadcastMessage("Damage",damage);
 				Instantiate(myAttackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
@@ -61,7 +77,7 @@ public class CharacterMotor : MonoBehaviour {
 		//Right
 		else if(characterProperties.looking == CharacterProperties.Looking.right){
 			foreach(GameObject damagedObject in right.inColliderObjects){
-				damagedObject.BroadcastMessage("Damage");
+				damagedObject.BroadcastMessage("Damage",damage);
 				Instantiate(myAttackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
@@ -70,7 +86,7 @@ public class CharacterMotor : MonoBehaviour {
 		//Down
 		else if(characterProperties.looking == CharacterProperties.Looking.down){
 			foreach(GameObject damagedObject in down.inColliderObjects){
-				damagedObject.BroadcastMessage("Damage");
+				damagedObject.BroadcastMessage("Damage",damage);
 				Instantiate(myAttackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 				Vector3 delta = damagedObject.transform.position - myTransform.position;
 				damagedObject.rigidbody.AddRelativeForce(delta.normalized*5f,ForceMode.Impulse);
@@ -79,7 +95,7 @@ public class CharacterMotor : MonoBehaviour {
 		//Left
 		else if(characterProperties.looking == CharacterProperties.Looking.left){
 			foreach(GameObject damagedObject in left.inColliderObjects){
-				damagedObject.BroadcastMessage("Damage");
+				damagedObject.BroadcastMessage("Damage",damage);
 				Instantiate(myAttackExplosion,damagedObject.transform.position,Quaternion.Euler(0,-180,-180));
 
 				Vector3 delta = damagedObject.transform.position - myTransform.position;

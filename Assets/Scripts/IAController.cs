@@ -13,7 +13,7 @@ public class IAController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if(characterProperties.AI){
+		if(characterProperties.AI && characterProperties.alive==true){
 
 			//MOVE
 			float deltaX = playerTransform.position.x - myTransform.position.x;

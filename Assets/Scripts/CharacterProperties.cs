@@ -8,6 +8,7 @@ public class CharacterProperties : MonoBehaviour {
 	public float vertical;
 	public string spriteName;
 	public bool attacking = false;
+	public bool alive=true;
 	public enum Looking{up,right,left,down};
 	public Looking looking = Looking.down;
 	CharacterAnimations characterAnimations;
