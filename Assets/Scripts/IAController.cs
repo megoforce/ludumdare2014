@@ -41,6 +41,10 @@ public class IAController : MonoBehaviour {
 
 			if(d < .5f && !characterProperties.attacking)
 				characterProperties.attacking = true;
+		} else {
+			characterProperties.horizontal = 0;
+			characterProperties.vertical = 0;
 		}
 	}
+	
 }

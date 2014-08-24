@@ -27,6 +27,9 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform.position = new Vector3(20,20,myTransform.position.z);
 		armor=99;
 		alive=true;
+		if(characterProperties.AI==false) {
+			RefreshStatusMessage();
+		}
 	}
 	void Start(){
 		myAttackExplosion = (characterProperties.AI) ? attackExplosionEnemy : attackExplosionPlayer;
@@ -52,13 +55,29 @@ public class CharacterMotor : MonoBehaviour {
 			CheckForAttacking();
 
 	}
-	void Damage(float damage) {
+	void Damage(float fdamage) {
+
 		if(characterProperties.alive==true) {
-			print(health);
-			health=health-(int)damage;
-			if(health<1) Die();
+			int damage=(int)fdamage;
+			int finaldamage=damage;
+			if(RandomExt.RandomFloatBetween(0,100) < characterProperties.armor) {
+				finaldamage=(finaldamage-(characterProperties.armor/10));
+				characterProperties.armor=characterProperties.armor-damage;
+			} 
+			if(finaldamage<0) finaldamage=0;
+			if(characterProperties.armor<0) characterProperties.armor=0;
+			characterProperties.health=characterProperties.health-finaldamage;
+			if(characterProperties.AI==false) {
+				RefreshStatusMessage();
+			}
+			Debug.Log("d: "+damage.ToString()+" fd:"+finaldamage.ToString());
+			if(characterProperties.health<1) Die();
+			
 		}
 
+	}
+	void RefreshStatusMessage() {
+		GlobalStuff.instance.gUIManager.statusLabel.text="HEALTH:"+characterProperties.health.ToString()+" ARMOR:"+characterProperties.armor.ToString()+" KEYS:0/64";
 	}
 	void Die() {
 		characterProperties.alive=false;

@@ -127,6 +127,11 @@ public class CharacterAnimations : MonoBehaviour {
 			offset = (offset + 1 == 3) ? 0 : offset + 1;
 		}
 	}
+	void Update() {
+		if(characterProperties.alive==false) {
+			// sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/43");
+		}
+	}
 }
 
 
