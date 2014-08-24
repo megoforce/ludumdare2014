@@ -38,4 +38,7 @@ public class MonophonicTracks : MonoBehaviour {
 	public void Play(AudioClip clip){
 		Play(clip,0,1,1,0);
 	}
+	public void Stop(int track){
+		audioSources[track].Stop();
+	}
 }

@@ -16,6 +16,7 @@ public class GameDataLoader : MonoBehaviour {
 	public float pressure;
 	public float weather;
 	public float wind;
+	public AudioClip teleport;
 
 	void Start() {
 
@@ -31,7 +32,9 @@ public class GameDataLoader : MonoBehaviour {
 		StartCoroutine(SearchWeatherData());
 	}
 	IEnumerator SearchWeatherData() {
-		GlobalStuff.instance.gUIManager.label1.text = "CONNECTING... [LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"]";
+		MonophonicTracks.instance.Play(teleport,1,RandomExt.RandomFloatBetween(.9f,1.1f));
+
+		GlobalStuff.instance.gUIManager.label1.text = "[LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"]...CONNECTING";
 		GlobalStuff.instance.gUIManager.label2.text = "Searching for weather data...";
 
 		Debug.Log (GlobalStuff.instance.lat);
@@ -79,9 +82,8 @@ public class GameDataLoader : MonoBehaviour {
 			
 			StartCoroutine(GlitchesOff());
 
-			
-			
-			
+			MonophonicTracks.instance.Stop(1);
+
 		}
 		else
 		{
