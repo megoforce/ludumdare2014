@@ -13,6 +13,7 @@ public class CharacterMotor : MonoBehaviour {
 	public int health;
 	public int armor;
 	public bool alive;
+	public tk2dTileMap tileMap;
 	GameObject myAttackExplosion;
 
 	float ampVelocity = 70f;
@@ -38,6 +39,14 @@ public class CharacterMotor : MonoBehaviour {
 	void FixedUpdate () {
 
 		if(!characterProperties.AI){
+			// current tile
+			int x = (int)transform.position.x;
+			int y = (int)transform.position.y;
+			x=x+1;
+			y=y+1;
+			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
+				Debug.Log ("x:"+x.ToString()+" y:"+y.ToString()+" tile:"+tileMap.GetTile(x,y,1).ToString());
+			}
 			InputDevice inputDevice = InputManager.ActiveDevice;
 			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
 			characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
@@ -53,6 +62,10 @@ public class CharacterMotor : MonoBehaviour {
 
 		if(characterProperties.attacking)
 			CheckForAttacking();
+		if (characterProperties.AI == false) {
+			int x = (int)transform.position.x;
+			Debug.Log (x);
+		}
 
 	}
 	void Damage(float fdamage) {
@@ -122,7 +135,6 @@ public class CharacterMotor : MonoBehaviour {
 			}
 		}
 	}
-
 
 
 }
