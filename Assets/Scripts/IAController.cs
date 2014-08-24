@@ -16,6 +16,7 @@ public class IAController : MonoBehaviour {
 		if(characterProperties.AI){
 			float deltaX = playerTransform.position.x - myTransform.position.x;
 			float deltaY = playerTransform.position.y - myTransform.position.y;
+
 			if(deltaX > 0){
 				characterProperties.horizontal = .3f;
 			} else if (deltaY < 0){

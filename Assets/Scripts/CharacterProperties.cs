@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CharacterProperties : MonoBehaviour {
 	public bool AI = false;
+	public float health = 100f;
 	public float horizontal;
 	public float vertical;
 	public string spriteName;
