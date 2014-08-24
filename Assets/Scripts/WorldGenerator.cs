@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class WorldGenerator : MonoBehaviour {
@@ -32,20 +32,66 @@ public class WorldGenerator : MonoBehaviour {
 		for(int x = 0; x < tileMap.width; x++){
 			for(int y = 0; y < tileMap.width; y++){
 				if(Mathf.PerlinNoise(x*.07f,y*.07f) < .3f){
-					tileMap.Layers[5].SetTile(x,y,borderTileId);
-					
+					tileMap.Layers[5].SetTile(x,y,41);
+					if(tileMap.GetTile(x-1,y,5) <0 && tileMap.GetTile(x,y-1,5)<0) {
+						tileMap.Layers[5].SetTile(x,y,32);
+					} 
+
+
 				}
 			}
 		}
 		//Add bottom to mesetas
 		for(int x = 0; x < tileMap.width; x++){
 			for(int y = 0; y < tileMap.width; y++){
-				
+				int tileid=tileMap.GetTile(x,y,5);
+				if(tileid>0 && y>1 && y<tileMap.height) {
+					Debug.Log(tileid);
+					if(tileMap.GetTile(x,y-1,5)<0) {
+						tileMap.Layers[5].SetTile(x,y-1,43);
+						tileMap.Layers[5].SetTile(x,y-2,45);
+					
+
+					}
+				}
+			}
+		}
+
+		// left and right borders
+		for(int x = 0; x < tileMap.width; x++){
+			for(int y = 0; y < tileMap.width; y++){
+				int tileid=tileMap.GetTile(x,y,5);
+				if(y>1 && y<tileMap.height) {
+					if(tileid==41) {
+						// top
+						if(tileMap.GetTile(x-1,y,5)<0 && tileMap.GetTile(x,y+1,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,30);
+						}
+					}
+					if(tileid==43) {
+						// middle
+						if(tileMap.GetTile(x-1,y,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,33);
+							tileMap.Layers[5].SetTile(x,y+1,32);
+
+						} else if(tileMap.GetTile(x+1,y,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,54);
+						}
+					}
+					if(tileid==45) {
+						// bottom
+						if(tileMap.GetTile(x-1,y,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,35);
+						} else if(tileMap.GetTile(x+1,y,5)<0) {
+							tileMap.Layers[5].SetTile(x,y,55);
+						}
+					}
+				}
+
 			}
 		}
 		
-		
-		tileMap.Build();
+		tileMap.ForceBuild();
 	}
 
 
