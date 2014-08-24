@@ -46,7 +46,7 @@ public class CharacterMotor : MonoBehaviour {
 			x=x+1;
 			y=y+1;
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
-				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
+				//print(x+","+y+" = "+tileMap.GetTile(x,y,1));
 				if(tileMap.GetTile(x,y,1) == 7){
 					print("health!");
 				}
