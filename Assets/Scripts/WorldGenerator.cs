@@ -4,26 +4,35 @@ using System.Collections;
 public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
 	
-	public void GenerateWorld(float temperature, float humidity, float pressure, string skyname){
+	public void GenerateWorld(float temperature, float humidity, float pressure, string skyname,float lat, float lng){
 		
 		//Floor
 		int floorTileId = 0;
 		for(int i = 0; i < tileMap.width;i++){
 			for(int j = 0; j < tileMap.height;j++){
 				tileMap.Layers[0].SetTile(i,j,floorTileId);
-				if(Random.Range(0,300)>200) {
-					tileMap.Layers[1].SetTile(i,j,0);
-					if(Random.Range(0,humidity)>64) {
-						tileMap.Layers[1].SetTile(i,j,7);
-					} 
-					if(Random.Range(0,humidity)<32) {
-						tileMap.Layers[1].SetTile(i,j,1);
-					} else if (Random.Range(0,humidity)<1) {
-						tileMap.Layers[1].SetTile(i,j,14);
-					}
-
+				if(Random.Range(0,humidity)>64) {
 
 				}
+				// muy humedo
+				if(Random.Range(0,128)<humidity) {
+					if((Random.Range(0,128)<temperature) && temperature>0) {
+						tileMap.Layers[1].SetTile(i,j,7);
+					} else if(Random.Range(0,16)==1 && temperature>0) {
+						tileMap.Layers[1].SetTile(i,j,13);
+					}
+				}
+				// muy seco
+				if(Random.Range(0,humidity/2)==1) {
+					// piedras
+					tileMap.Layers[1].SetTile(i,j,1);
+					if(Random.Range(0,4)==1 && temperature>4) {
+						tileMap.Layers[1].SetTile(i,j,1);
+					} else if(Random.Range(0,2)==1 && temperature>8) {
+						tileMap.Layers[1].SetTile(i,j,14);
+					}
+				}
+
 			}
 		}
 		
@@ -41,7 +50,7 @@ public class WorldGenerator : MonoBehaviour {
 		//Perlin noise mesetas
 		for(int x = 0; x < tileMap.width; x++){
 			for(int y = 0; y < tileMap.width; y++){
-				if(Mathf.PerlinNoise(x*.07f,y*.07f) < .3f){
+				if(Mathf.PerlinNoise(x*.07f+Mathf.Round(lat),y*.07f+Mathf.Round(lng)) < .3f){
 					tileMap.Layers[5].SetTile(x,y,10);
 
 

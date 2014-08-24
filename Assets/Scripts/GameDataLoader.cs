@@ -89,7 +89,7 @@ public class GameDataLoader : MonoBehaviour {
 	IEnumerator GlitchesOff(){
 		GlobalStuff.instance.gUIManager.glitchEffect.enabled = false;
 		yield return new WaitForSeconds(1f);
-		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname);
+		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,lat,lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
 	}
 }
