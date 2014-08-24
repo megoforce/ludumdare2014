@@ -45,6 +45,7 @@ public class CharacterMotor : MonoBehaviour {
 			x=x+1;
 			y=y+1;
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
+<<<<<<< HEAD
 //				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
 				int currentTile = tileMap.GetTile(x,y,1);
 				if(currentTile == 7 || currentTile == 13){ //helath
@@ -63,6 +64,11 @@ public class CharacterMotor : MonoBehaviour {
 						PlayerPrefs.SetInt("armor",characterProperties.armor);
 						RefreshStatusMessage();
 					}
+=======
+				//print(x+","+y+" = "+tileMap.GetTile(x,y,1));
+				if(tileMap.GetTile(x,y,1) == 7){
+					print("health!");
+>>>>>>> bed9f233175d0a1410b4a2d544b6961497c3b5ea
 				}
 				//stones 8 1 2
 
