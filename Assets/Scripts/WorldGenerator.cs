@@ -54,7 +54,7 @@ public class WorldGenerator : MonoBehaviour {
 			for(int y = 0; y < tileMap.width; y++){
 				int tileid=tileMap.GetTile(x,y,5);
 				if(tileid>0 && y>1 && y<tileMap.height) {
-					Debug.Log(tileid);
+					//Debug.Log(tileid);
 					if(tileMap.GetTile(x,y-1,5)<0) {
 						tileMap.Layers[5].SetTile(x,y-1,22);
 						tileMap.Layers[5].SetTile(x,y-2,28);

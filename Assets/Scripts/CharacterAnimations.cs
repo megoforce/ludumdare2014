@@ -33,8 +33,10 @@ public class CharacterAnimations : MonoBehaviour {
 		int v = 10 - (int)(Mathf.Abs(speed*6));
 
 		if(speed > 0){
+			characterProperties.looking = CharacterProperties.Looking.right;
 			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(8 - offsetH).ToString());
 		} else {
+			characterProperties.looking = CharacterProperties.Looking.left;
 			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(5 - offsetH).ToString());
 		}
 
@@ -46,9 +48,11 @@ public class CharacterAnimations : MonoBehaviour {
 		int v = 10 - (int)(Mathf.Abs(speed*6));
 		
 		if(speed > 0){
+			characterProperties.looking = CharacterProperties.Looking.up;
 			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(11 - offsetH).ToString());
 		} else {
-				sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(2 - offsetH).ToString());
+			characterProperties.looking = CharacterProperties.Looking.down;
+			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(2 - offsetH).ToString());
 		}
 		
 		if((fCounter % v) == 0){

@@ -64,6 +64,7 @@ public class GameDataLoader : MonoBehaviour {
 			GlobalStuff.instance.gUIManager.labelBottom.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper();
 
 			StartCoroutine(GlitchesOff());
+			GlobalStuff.instance.enemyGenerator.GenerateEnemies();
 		}
 		else
 		{
