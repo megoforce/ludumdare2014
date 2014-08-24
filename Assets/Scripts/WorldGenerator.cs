@@ -3,7 +3,8 @@ using System.Collections;
 
 public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
-	
+	public CameraFilterPack_Colors_HUE_Rotate hueCamera;
+
 	public void GenerateWorld(float temperature, float humidity, float pressure, string skyname,float lat, float lng){
 		
 		//Floor
@@ -75,7 +76,16 @@ public class WorldGenerator : MonoBehaviour {
 
 		
 		tileMap.ForceBuild();
+
+		SetTemperatureColor(temperature);
 	}
 
+	void SetTemperatureColor(float temp){
 
+
+		temp = Mathf.Min(Mathf.Max(-20,temp),40);
+		float r = (temp+20f) / 60f;
+		hueCamera.HUE = Mathf.Lerp(2.61f,6.24f,r);
+		print("Temp = "+temp+ " HUE:"+hueCamera.HUE+" r:"+r);
+	}
 }

@@ -15,7 +15,7 @@ public class CameraFilterPack_Color_BrightContrastSaturation : MonoBehaviour {
 	private Material SCMaterial;
 
 	[Range(0.0f, 10.0f)] public float Brightness = 2.0f;
-	[Range(0.0f, 10.0f)] public float Saturation = 1.5f;
+	public float Saturation = 1.5f;
 	[Range(0.0f, 10.0f)] public float Contrast = 1.5f;
 
 	public static float ChangeBrightness ;
@@ -80,7 +80,7 @@ public class CameraFilterPack_Color_BrightContrastSaturation : MonoBehaviour {
 		if (Application.isPlaying)
 		{
 			Brightness  = ChangeBrightness ;
-			Saturation  = ChangeSaturation ;
+			//Saturation  = ChangeSaturation ;
 			Contrast 	= ChangeContrast;
 		}
 		#if UNITY_EDITOR

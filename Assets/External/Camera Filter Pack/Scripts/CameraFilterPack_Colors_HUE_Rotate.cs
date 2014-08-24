@@ -10,13 +10,11 @@ using System.Collections;
 public class CameraFilterPack_Colors_HUE_Rotate : MonoBehaviour {
 	#region Variables
 	public Shader SCShader;
-	private float TimeX = 1.0f;
+	public float HUE = 2.6f;
 	private Vector4 ScreenResolution;
 	private Material SCMaterial;
-	[Range(1, 20)]
-	public float Speed = 10f;
 
-	public static float ChangeSpeed;
+
 	#endregion
 	
 	#region Properties
@@ -35,7 +33,6 @@ public class CameraFilterPack_Colors_HUE_Rotate : MonoBehaviour {
 	#endregion
 	void Start () 
 	{
-		ChangeSpeed = Speed;
 
 		SCShader = Shader.Find("CameraFilterPack/Colors_HUE_Rotate");
 
@@ -50,10 +47,10 @@ public class CameraFilterPack_Colors_HUE_Rotate : MonoBehaviour {
 	{
 		if(SCShader != null)
 		{
-			TimeX+=Time.deltaTime;
-			if (TimeX>100)  TimeX=0;
-			material.SetFloat("_TimeX", TimeX);
-			material.SetFloat("_Speed", Speed);
+			//TimeX+=Time.deltaTime;
+			if (HUE>100)  HUE=0;
+			material.SetFloat("_TimeX", HUE);
+			material.SetFloat("_Speed", 1);
 			material.SetVector("_ScreenResolution",new Vector2(Screen.width,Screen.height));
 			Graphics.Blit(sourceTexture, destTexture, material);
 		}
@@ -70,7 +67,6 @@ public class CameraFilterPack_Colors_HUE_Rotate : MonoBehaviour {
 	{
 		if (Application.isPlaying)
 		{
-			Speed = ChangeSpeed;
 		}
 		#if UNITY_EDITOR
 		if (Application.isPlaying!=true)
