@@ -25,7 +25,7 @@ public class CharacterMotor : MonoBehaviour {
 	void Awake(){
 		myTransform = transform;
 		characterProperties = GetComponent<CharacterProperties>();
-		myTransform.position = new Vector3(40,40,myTransform.position.z);
+		myTransform.position = new Vector3(41,41,myTransform.position.z);
 		armor=99;
 		alive=true;
 		if(characterProperties.AI==false) {
@@ -40,8 +40,8 @@ public class CharacterMotor : MonoBehaviour {
 
 		if(!characterProperties.AI){
 			// current tile
-			int x = (int)(transform.position.x*(256f/82f));
-			int y = (int)(transform.position.y*(256f/82f));
+			int x = Mathf.RoundToInt(transform.position.x*(256f/82f));
+			int y = Mathf.RoundToInt(transform.position.y*(256f/82f));
 
 			x=x+1;
 			y=y+1;
@@ -66,10 +66,8 @@ public class CharacterMotor : MonoBehaviour {
 
 		if(characterProperties.attacking)
 			CheckForAttacking();
-		if (characterProperties.AI == false) {
-			int x = (int)transform.position.x;
-//			Debug.Log (x);
-		}
+
+
 
 	}
 	void Damage(float fdamage) {

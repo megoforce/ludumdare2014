@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyGenerator : MonoBehaviour {
 	public GameObject characterPrefab;
 	public void GenerateEnemies(){
-		for(int i = 0; i < 32; i++){
+		for(int i = 0; i < 0; i++){
 			GameObject newEnemy = Instantiate(characterPrefab) as GameObject;
 			CharacterProperties cp = newEnemy.GetComponent<CharacterProperties>();
 			int level=Random.Range(0,99);
@@ -12,7 +12,7 @@ public class EnemyGenerator : MonoBehaviour {
 			cp.armor=Random.Range(1,level);
 
 			cp.Init(true);
-			newEnemy.transform.position = new Vector3(RandomExt.RandomFloatBetween(0,80),RandomExt.RandomFloatBetween(0,80),0);
+			newEnemy.transform.position = new Vector3(RandomExt.RandomFloatBetween(0,82),RandomExt.RandomFloatBetween(0,82),0);
 		}
 	}
 }
