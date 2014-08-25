@@ -16,7 +16,7 @@ public class GameDataLoader : MonoBehaviour {
 	public float pressure;
 	public float weather;
 	public float wind;
-	public AudioClip teleport;
+	public AudioClip connecting;
 
 	void Start() {
 
@@ -24,7 +24,6 @@ public class GameDataLoader : MonoBehaviour {
 			print("reset lat lng");
 			PlayerPrefs.SetFloat("lat",RandomExt.RandomFloatBetween(-90,90));
 			PlayerPrefs.SetFloat("lng",RandomExt.RandomFloatBetween(-180,180));
-
 		}
 		GlobalStuff.instance.lat = PlayerPrefs.GetFloat("lat");
 		GlobalStuff.instance.lng = PlayerPrefs.GetFloat("lng");
@@ -32,8 +31,7 @@ public class GameDataLoader : MonoBehaviour {
 		StartCoroutine(SearchWeatherData());
 	}
 	IEnumerator SearchWeatherData() {
-		MonophonicTracks.instance.Play(teleport,1,RandomExt.RandomFloatBetween(.9f,1.1f));
-
+		MonophonicTracks.instance.Play(connecting,1,RandomExt.RandomFloatBetween(.9f,1.1f));
 		GlobalStuff.instance.gUIManager.label1.text = "[LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"]...CONNECTING";
 		GlobalStuff.instance.gUIManager.label2.text = "Searching for weather data...";
 
@@ -82,7 +80,7 @@ public class GameDataLoader : MonoBehaviour {
 			
 			StartCoroutine(GlitchesOff());
 
-			MonophonicTracks.instance.Stop(1);
+
 
 		}
 		else
@@ -105,7 +103,9 @@ public class GameDataLoader : MonoBehaviour {
 
 	IEnumerator GlitchesOff(){
 		GlobalStuff.instance.gUIManager.glitchEffect.enabled = false;
+		MonophonicTracks.instance.Stop(1);
 		yield return new WaitForSeconds(1f);
+
 		GlobalStuff.instance.enemyGenerator.GenerateEnemies();
 		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;

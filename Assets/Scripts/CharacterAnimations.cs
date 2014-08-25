@@ -4,6 +4,8 @@ using System.Collections;
 public class CharacterAnimations : MonoBehaviour {
 	public tk2dSprite sprite;
 	CharacterProperties characterProperties;
+	public AudioClip step;
+	public AudioClip punch;
 	void Awake(){
 		characterProperties = GetComponent<CharacterProperties>();
 		sprite.SortingOrder = 10;
@@ -59,7 +61,9 @@ public class CharacterAnimations : MonoBehaviour {
 
 	int animationFrames = 0;
 	void AttackingAnimations(){
-
+		if(animationFrames == 0){
+			MonophonicTracks.instance.Play(punch,10,.5f,.1f);
+		}
 		if(characterProperties.looking == CharacterProperties.Looking.up){
 			sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+(21 + animationFrames).ToString());
 		}
@@ -98,7 +102,7 @@ public class CharacterAnimations : MonoBehaviour {
 	int offset = 0;
 
 	void WalkH(float speed){
-		int v = 10 - (int)(Mathf.Abs(speed*6));
+		int v = 7 - (int)(Mathf.Abs(speed*6));
 
 		if(speed > 0){
 			characterProperties.looking = CharacterProperties.Looking.right;
@@ -111,9 +115,12 @@ public class CharacterAnimations : MonoBehaviour {
 		if((fCounter % v) == 0){
 			offset = (offset + 1 == 3) ? 0 : offset + 1;
 		}
+		if(!characterProperties.AI && offset == 0){
+			MonophonicTracks.instance.Play(step,10,2.5f+Mathf.Abs(speed/3f),.1f);
+		}
 	}
 	void WalkV(float speed){
-		int v = 10 - (int)(Mathf.Abs(speed*6));
+		int v = 7 - (int)(Mathf.Abs(speed*6));
 		
 		if(speed > 0){
 			characterProperties.looking = CharacterProperties.Looking.up;
@@ -125,6 +132,9 @@ public class CharacterAnimations : MonoBehaviour {
 		
 		if((fCounter % v) == 0){
 			offset = (offset + 1 == 3) ? 0 : offset + 1;
+		}
+		if(!characterProperties.AI && offset == 0){
+			MonophonicTracks.instance.Play(step,10,2.5f+Mathf.Abs(speed/3f),.1f);
 		}
 	}
 	void Update() {

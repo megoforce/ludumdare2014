@@ -11,6 +11,7 @@ public class CharacterMotor : MonoBehaviour {
 	public GameObject attackExplosionEnemy;
 	public bool alive;
 	public tk2dTileMap tileMap;
+	public AudioClip hurt;
 	GameObject myAttackExplosion;
 
 	float ampVelocity = 70f;
@@ -45,7 +46,6 @@ public class CharacterMotor : MonoBehaviour {
 			x=x+1;
 			y=y+1;
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
-<<<<<<< HEAD
 //				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
 				int currentTile = tileMap.GetTile(x,y,1);
 				if(currentTile == 7 || currentTile == 13){ //helath
@@ -64,11 +64,7 @@ public class CharacterMotor : MonoBehaviour {
 						PlayerPrefs.SetInt("armor",characterProperties.armor);
 						RefreshStatusMessage();
 					}
-=======
-				//print(x+","+y+" = "+tileMap.GetTile(x,y,1));
-				if(tileMap.GetTile(x,y,1) == 7){
-					print("health!");
->>>>>>> bed9f233175d0a1410b4a2d544b6961497c3b5ea
+
 				}
 				//stones 8 1 2
 
@@ -95,6 +91,8 @@ public class CharacterMotor : MonoBehaviour {
 
 	}
 	void Damage(float fdamage) {
+		if(!characterProperties.AI)
+			MonophonicTracks.instance.Play(hurt,10,1,.5f);
 
 		if(characterProperties.alive==true) {
 			int damage=(int)fdamage;
@@ -126,8 +124,10 @@ public class CharacterMotor : MonoBehaviour {
 	void Die() {
 		characterProperties.alive=false;
 		if(!characterProperties.AI){
-			GameDataLoader.ResetData();
-			Application.LoadLevel("home");
+			Time.timeScale = 0;
+			//TODO gui!!
+			//GameDataLoader.ResetData();
+			//Application.LoadLevel("home");
 		}
 
 	}
