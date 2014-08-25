@@ -981,7 +981,7 @@ public class UICamera : MonoBehaviour
 		if (mCurrentSelection == null) inputHasFocus = false;
 
 		// Update the keyboard and joystick events
-		if (mCurrentSelection != null) ProcessOthers();
+		//if (mCurrentSelection != null) ProcessOthers();
 
 		// If it's time to show a tooltip, inform the object we're hovering over
 		if (useMouse && mHover != null)
