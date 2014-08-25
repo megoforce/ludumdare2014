@@ -64,7 +64,8 @@ public class GameDataLoader : MonoBehaviour {
 				Application.LoadLevel("home");
 			}
 			Debug.Log(N);
-			country=N["sys"]["country"].Value;
+
+			country=CountryConverter.CodeToName(N["sys"]["country"].Value);
 			temperature=float.Parse(N["main"]["temp"].Value);
 			humidity=float.Parse(N["main"]["humidity"].Value);
 			pressure=float.Parse(N["main"]["pressure"].Value);

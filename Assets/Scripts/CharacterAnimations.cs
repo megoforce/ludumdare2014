@@ -137,11 +137,7 @@ public class CharacterAnimations : MonoBehaviour {
 			MonophonicTracks.instance.Play(step,10,2.5f+Mathf.Abs(speed/3f),.1f);
 		}
 	}
-	void Update() {
-		if(characterProperties.alive==false) {
-			// sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/43");
-		}
-	}
+
 }
 
 
