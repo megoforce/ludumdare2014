@@ -25,7 +25,7 @@ public class TeleportingText : MonoBehaviour {
 		label.text = "TELEPORTING "+PlayerPrefs.GetString("direction")+" IN... ";
 		cameraFX.enabled = true;
 
-		for(int i = 3; i > 0;i--){
+		for(int i = 5; i > 0;i--){
 			countdown.text = i.ToString();
 			yield return new WaitForSeconds(1f);
 		}

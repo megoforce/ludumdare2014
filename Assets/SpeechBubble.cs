@@ -89,11 +89,11 @@ public class SpeechBubble : MonoBehaviour
 		GUI.EndGroup();
 		}
 		//If the button is pressed, go back to 41 Post  
-		if(GUI.Button(new Rect(50,60,100,30),"BProbar mensaje"))  
+		/*if(GUI.Button(new Rect(50,60,100,30),"BProbar mensaje"))  
 		{  
 			gameObject.SendMessage("SayIt", "holaholaaaaaaa");
 			//Application.OpenURL("http://www.41post.com/?p=4123");  
-		}  	
+		} */ 	
 	}  
 	
 	//Called after camera has finished rendering the scene  

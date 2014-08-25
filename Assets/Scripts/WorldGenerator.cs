@@ -170,7 +170,7 @@ public class WorldGenerator : MonoBehaviour {
 		// totem 
 		GameObject totemi=Instantiate (totemPrefab) as GameObject;
 		Totem totem = totemi.GetComponent<Totem> ();
-		totem.Init (1,1,1);
+		totem.Init(1,125,130);
 	
 		SetTemperatureColor(temperature);
 	}
