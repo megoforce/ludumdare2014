@@ -14,7 +14,7 @@ public class CharacterMotor : MonoBehaviour {
 	public GameObject gameOverPrefab;
 	GameObject myAttackExplosion;
 
-	float ampVelocity = 90f;//30f;
+	float ampVelocity = 30f;//30f;
 	Transform myTransform;
 	public Rigidbody myRigidbody;
 
