@@ -126,6 +126,9 @@ public class GameDataLoader : MonoBehaviour {
 		PlayerPrefs.SetString("direction","NORTH");
 		PlayerPrefs.SetFloat ("lat", RandomExt.RandomFloatBetween (-90, 90));
 		PlayerPrefs.SetFloat ("lng", RandomExt.RandomFloatBetween (-180, 180));
+		PlayerPrefs.SetInt("health",99);
+		PlayerPrefs.SetInt("armor",99);
+
 	}
 
 	IEnumerator GlitchesOff(){

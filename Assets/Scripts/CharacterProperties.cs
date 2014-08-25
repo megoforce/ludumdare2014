@@ -8,6 +8,7 @@ public class CharacterProperties : MonoBehaviour {
 	public float horizontal;
 	public float vertical;
 	public string spriteName;
+	public int level = 0;
 	public bool attacking = false;
 	public bool alive=true;
 	public int power=1;
@@ -23,13 +24,35 @@ public class CharacterProperties : MonoBehaviour {
 		tag = (enemy) ? "NotPlayer" : "Player";
 		characterAnimations.sprite.gameObject.tag = (enemy) ? "NotPlayerSprite" : "PlayerSprite";
 
+		if(!AI){
+			int cardsCounter = 0;
+			for(int i = 0; i < 5; i++)
+				if(PlayerPrefs.GetInt("card-"+(i+1)) == 1)
+					cardsCounter++;
+			level = cardsCounter;
+			spriteName = spriteName+"-"+level;
+			health = PlayerPrefs.GetInt("health");
+			armor = PlayerPrefs.GetInt("armor");
+			characterAnimations = GetComponent<CharacterAnimations>();
+			characterAnimations.sprite.spriteId = characterAnimations.sprite.GetSpriteIdByName(spriteName+"/1");
+		}
 	}
 	void Start(){
 		if(!AI){
-			health = PlayerPrefs.GetInt("health");
-			armor = PlayerPrefs.GetInt("armor");
-			GlobalStuff.instance.gUIManager.RefreshGUIValues();
+			RefreshPlayer();
 		}
+	}
+	public void RefreshPlayer(){
+		int cardsCounter = 0;
+		for(int i = 0; i < 5; i++)
+			if(PlayerPrefs.GetInt("card-"+(i+1)) == 1)
+				cardsCounter++;
+		level = cardsCounter;
+		spriteName = "player-"+level;
+		health = PlayerPrefs.GetInt("health");
+		armor = PlayerPrefs.GetInt("armor");
+		characterAnimations = GetComponent<CharacterAnimations>();
+		characterAnimations.sprite.spriteId = characterAnimations.sprite.GetSpriteIdByName(spriteName+"/1");
 	}
 
 }

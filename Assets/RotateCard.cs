@@ -21,6 +21,7 @@ public class RotateCard : MonoBehaviour {
 		secondRotationCard.Play(true);
 		secondRotationLabel.Play(true);
 		GlobalStuff.instance.gUIManager.RefreshGUIValues();
+		GlobalStuff.instance.player.GetComponent<CharacterProperties>().RefreshPlayer();
 
 	}
 	public void secondRotFinished(){
