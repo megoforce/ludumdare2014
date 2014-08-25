@@ -27,58 +27,63 @@ public class IntroScript : MonoBehaviour {
 		if(playintro){
 			yield return new WaitForSeconds(1f);
 			activeYrenko = true;
-			yrenkoObject.text = "Master. What's going on? Everything it's falling apart";
+			yrenkoObject.text = "Master. THE CRYSTAL CITY IT'S COLLAPSING!!";
 
 			yield return new WaitForSeconds(2f);
 			activeYrenko = false;
 			activeMaestro = true;
-			maestroObject.text = "Yrenko, the crystal city it's in danger";
+			maestroObject.text = "Yrenko, the balance has been broken";
 
 			yield return new WaitForSeconds(2f);
 			maestroObject.text = "You must back to earth to restablish the connection...";
 
 			yield return new WaitForSeconds(2f);
-			maestroObject.text = "...between the earth and the human beigns";
+			maestroObject.text = "...between the nature and the human beings";
 
 			yield return new WaitForSeconds(3f);
 			activeMaestro = false;
 			activeYrenko = true;
-			yrenkoObject.text = "How can achieve that?";
+			yrenkoObject.text = "But master, that's imposible! The earth is full of demons!!";
 
 			yield return new WaitForSeconds(3f);
 			activeYrenko = false;
 			activeMaestro = true;
-			maestroObject.text = "You must find the elemental cards, that are lose around the planet";
+			maestroObject.text = "Young Yrenko, your destiny is already written";
 
 			yield return new WaitForSeconds(2f);
-			maestroObject.text = "Be careful of the evil spirits, they will try to stop you ";
+			maestroObject.text = "You are the only one who can use the mask of Andacollo";
 
 			yield return new WaitForSeconds(2f);
-			maestroObject.text = "They are accountables for this tragedy, they are getting to close to the human race";
+			maestroObject.text = "Get the 5 ELEMENTAL CARDS. stored on the TOTEMS";
 
 			yield return new WaitForSeconds(2f);
-			maestroObject.text = "Search for the 4 totems that will transport you through the planet";
+			maestroObject.text = "Each totem spawn on a place on the earth who has that climate";
+
+			yield return new WaitForSeconds(2f);
+			maestroObject.text = "Search for those climates on weather channels, and live feeds";
 
 			yield return new WaitForSeconds(3f);
 			activeMaestro = false;
 			activeYrenko = true;
-			yrenkoObject.text = "Ok master, i will find those cards";
+			yrenkoObject.text = "Ok master, i will find those cards!";
 
 
 			yield return new WaitForSeconds(3f);
 			activeYrenko = false;
 			activeMaestro = true;
-			maestroObject.text = "Take this mask, will help you around";
-
-
-			yield return new WaitForSeconds(2f);
-			maestroObject.text = "A last thing, Our faith it's in your hand Yrenko";
+			maestroObject.text = "A last thing. Our faith of in your hand";
 
 			yield return new WaitForSeconds(5f);
 			Application.LoadLevel("home");
 
 		}
 
+	}
+
+	void OnMouseOver() {
+		if(playintro){
+			Application.LoadLevel("home");
+		}
 	}
 	
 	// Update is called once per frame
