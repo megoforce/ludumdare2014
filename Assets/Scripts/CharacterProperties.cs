@@ -26,7 +26,6 @@ public class CharacterProperties : MonoBehaviour {
 	}
 	void Start(){
 		if(!AI){
-			print("adslkjkjlasdkljadsjklasdkjladskljkljdakjldsaklj");
 			health = PlayerPrefs.GetInt("health");
 			armor = PlayerPrefs.GetInt("armor");
 			GlobalStuff.instance.gUIManager.RefreshGUIValues();
