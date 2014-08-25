@@ -18,10 +18,10 @@ public class GUIManager : MonoBehaviour {
 
 		if(inputDevice.Action3.WasPressed){
 			if(!GlobalStuff.instance.paused){
-				GlobalStuff.instance.paused = true;
+
 				progressSwitcher.Show();
 			} else {
-				GlobalStuff.instance.paused = false;
+
 				progressSwitcher.Hide();
 			}
 

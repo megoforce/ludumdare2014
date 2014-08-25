@@ -64,45 +64,45 @@ public class WorldGenerator : MonoBehaviour {
 				if(Mathf.PerlinNoise(x*.07f+Mathf.Round(lat),y*.07f+Mathf.Round(lng)) < .3f){
 					tileMap.Layers[5].SetTile(x,y,10);
 
+					//*// check borders, south
+					if (y-1 >= 0 && tileMap.Layers[5].GetTile(x, y-1) != 10) {
+						tileMap.Layers[5].SetTile(x, y-1, 16);
+					}
+
 					// check borders, north
-					/*if (x-1 >= 0 && tileMap.Layers[5].GetTile(x-1, y) == -1) {
-						tileMap.Layers[5].SetTile(x-1, y, 4);
-					}
-
-					// check borders, south
-					if (x+1 < tileMap.width && tileMap.Layers[5].GetTile(x+1, y) == -1) {
-						tileMap.Layers[5].SetTile(x+1, y, 16);
-					}
-
-					// check borders, east
-					if (y-1 >= 0 && tileMap.Layers[5].GetTile(x, y-1) == -1) {
-						tileMap.Layers[5].SetTile(x, y-1, 9);
+					if (y+1 < tileMap.width && tileMap.Layers[5].GetTile(x, y+1) != 10) {
+						tileMap.Layers[5].SetTile(x, y+1, 4);
 					}
 
 					// check borders, west
-					if (y+1 < tileMap.height && tileMap.Layers[5].GetTile(x, y+1) == -1) {
-						tileMap.Layers[5].SetTile(x, y+1, 11);
+					if (x-1 >= 0 && tileMap.Layers[5].GetTile(x-1, y) != 10) {
+						tileMap.Layers[5].SetTile(x-1, y, 9);
 					}
 
-					// check borders, northeast
-					if (x-1 >= 0 && y-1 >= 0 && tileMap.Layers[5].GetTile(x-1, y-1) == -1) {
-						tileMap.Layers[5].SetTile(x-1, y-1, 3);
+					// check borders, east
+					if (x+1 < tileMap.height && tileMap.Layers[5].GetTile(x+1, y) != 10) {
+						tileMap.Layers[5].SetTile(x+1, y, 11);
+					}//*/
+
+					// northwest
+					if (x-1 >= 0 && y+1 < tileMap.width && tileMap.Layers[5].GetTile(x-1, y+1) < 0) {
+						tileMap.Layers[5].SetTile(x-1, y+1, 3);
 					}
 
-					// check borders, northwest
-					if (x-1 >= 0 && y+1 < tileMap.height && tileMap.Layers[5].GetTile(x-1, y+1) == -1) {
-						tileMap.Layers[5].SetTile(x-1, y+1, 5);
+					// northeast
+					if (x+1 < tileMap.height && y+1 < tileMap.width && tileMap.Layers[5].GetTile(x+1, y+1) < 0) {
+						tileMap.Layers[5].SetTile(x+1, y+1, 5);
 					}
 
-					// check borders, southeast
-					if (x+1 < tileMap.width && y-1 >= 0 && tileMap.Layers[5].GetTile(x+1, y-1) == -1) {
-						tileMap.Layers[5].SetTile(x+1, y-1, 15);
+					// southwest
+					if (x-1 >= 0 && y-1 >= 0 && tileMap.Layers[5].GetTile(x-1, y-1) < 0) {
+						tileMap.Layers[5].SetTile(x-1, y-1, 15);
 					}
-
-					// check borders, southwest
-					if (x+1 < tileMap.width && y+1 < tileMap.height && tileMap.Layers[5].GetTile(x+1, y+1) == -1) {
-						tileMap.Layers[5].SetTile(x+1, y+1, 17);
-					}*/
+					
+					// southeast
+					if (x+1 < tileMap.height && y-1 >= 0 && tileMap.Layers[5].GetTile(x+1, y-1) < 0) {
+						tileMap.Layers[5].SetTile(x+1, y-1, 17);
+					}
 
 				}
 			}

@@ -32,31 +32,31 @@ public class CustomInputData : MonoBehaviour {
 		
 		if (device.Action1.WasPressed)
 		{
-			UICamera.selectedObject.SendMessage( "OnClick" );
+			UICamera.selectedObject.SendMessage( "OnClick" ,SendMessageOptions.DontRequireReceiver);
 		}
 		
 		if (device.Direction.Up.WasPressed)
 		{
 			UICamera.currentScheme = UICamera.ControlScheme.Controller;
-			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.UpArrow );
+			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.UpArrow ,SendMessageOptions.DontRequireReceiver);
 		}
 		
 		if (device.Direction.Down.WasPressed)
 		{
 			UICamera.currentScheme = UICamera.ControlScheme.Controller;
-			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.DownArrow );
+			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.DownArrow ,SendMessageOptions.DontRequireReceiver);
 		}
 		
 		if (device.Direction.Right.WasPressed)
 		{
 			UICamera.currentScheme = UICamera.ControlScheme.Controller;
-			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.RightArrow );
+			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.RightArrow ,SendMessageOptions.DontRequireReceiver);
 		}
 		
 		if (device.Direction.Left.WasPressed)
 		{
 			UICamera.currentScheme = UICamera.ControlScheme.Controller;
-			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.LeftArrow );
+			UICamera.selectedObject.SendMessage( "OnKey", KeyCode.LeftArrow ,SendMessageOptions.DontRequireReceiver);
 		}
 	}
 }
