@@ -12,6 +12,7 @@ public class GUIManager : MonoBehaviour {
 	public CameraFilterPack_TV_Chromatical glitchChromatical;
 	public ProgressSwitcher progressSwitcher;
 	public RefreshProgressCards refreshProgressCards;
+	public GameObject map;
 
 	void Update(){
 		InputDevice inputDevice = InputManager.ActiveDevice;

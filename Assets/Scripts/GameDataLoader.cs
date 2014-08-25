@@ -16,7 +16,7 @@ public class GameDataLoader : MonoBehaviour {
 	public float wind;
 	public AudioClip connecting;
 	private bool island;
-
+	AudioSource windAudioSource;
 	void Start() {
 
 		if(!PlayerPrefs.HasKey("lat") || !PlayerPrefs.HasKey("lng")){
@@ -34,8 +34,10 @@ public class GameDataLoader : MonoBehaviour {
 
 		bool island = false;
 		while (!island) {
+
 			GlobalStuff.instance.lat = PlayerPrefs.GetFloat("lat");
 			GlobalStuff.instance.lng = PlayerPrefs.GetFloat("lng");
+			GlobalStuff.instance.gUIManager.map.SetActive(true);
 
 			MonophonicTracks.instance.Play(connecting,1,RandomExt.RandomFloatBetween(.9f,1.1f));
 			GlobalStuff.instance.gUIManager.label1.text = "[LAT: " + GlobalStuff.instance.lat + ",LNG: " + GlobalStuff.instance.lng + "]...CONNECTING";
@@ -84,6 +86,7 @@ public class GameDataLoader : MonoBehaviour {
 				
 				if(!island) {
 					CheckForTeleport.SetNextChunkTeleport();
+					Application.LoadLevel("home");
 				}
 				country = CountryConverter.CodeToName (N ["sys"] ["country"].Value);
 
@@ -102,7 +105,8 @@ public class GameDataLoader : MonoBehaviour {
 			} else {
 				Debug.Log ("WWW error: " + request.error);
 			}
-	}
+
+		}
 
 		StartCoroutine (GlitchesOff ());
 
@@ -140,6 +144,10 @@ public class GameDataLoader : MonoBehaviour {
 		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,wind,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
 
+		windAudioSource = GameObject.FindGameObjectWithTag("Wind").GetComponent<AudioSource>();
+		windAudioSource.volume = Mathf.Abs(wind) / 10;
+		windAudioSource.pitch = 1+Mathf.Abs(wind) / 10;
+		GlobalStuff.instance.gUIManager.map.SetActive(false);
 	}
 }
 
