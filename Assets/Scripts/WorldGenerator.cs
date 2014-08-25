@@ -70,7 +70,7 @@ public class WorldGenerator : MonoBehaviour {
 					}
 
 					// check borders, south
-					if (x+1 < tileMap.width tileMap.Layers[5].GetTile(x+1, y) == -1) {
+					if (x+1 < tileMap.width && tileMap.Layers[5].GetTile(x+1, y) == -1) {
 						tileMap.Layers[5].SetTile(x+1, y, 16);
 					}
 
