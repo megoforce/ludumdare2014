@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class GUIManager : MonoBehaviour {
 	public UILabel label1;
@@ -9,6 +10,22 @@ public class GUIManager : MonoBehaviour {
 	public UILabel keys;
 	public GlitchEffect glitchEffect;
 	public CameraFilterPack_TV_Chromatical glitchChromatical;
+	public ProgressSwitcher progressSwitcher;
 
+
+	void Update(){
+		InputDevice inputDevice = InputManager.ActiveDevice;
+
+		if(inputDevice.Action3.WasPressed){
+			if(!GlobalStuff.instance.paused){
+				GlobalStuff.instance.paused = true;
+				progressSwitcher.Show();
+			} else {
+				GlobalStuff.instance.paused = false;
+				progressSwitcher.Hide();
+			}
+
+		}
+	}
 
 }
