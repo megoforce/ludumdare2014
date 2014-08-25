@@ -17,25 +17,49 @@ public class CharacterAnimations : MonoBehaviour {
 	int attackingFramesCounter = 0;
 	void FixedUpdate(){
 		fCounter ++;
-		if(!damaged){
-			if(!characterProperties.attacking){
-				attackingFramesCounter = 0;
+		if(characterProperties.alive){
+			if(!damaged){
+				if(!characterProperties.attacking){
+					attackingFramesCounter = 0;
 
-				if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
-					if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
-						WalkH(characterProperties.horizontal);
-					} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
-						WalkV(characterProperties.vertical);
+					if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
+						if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
+							WalkH(characterProperties.horizontal);
+						} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
+							WalkV(characterProperties.vertical);
+						}
+					} else {
+						StopAnimation();
 					}
 				} else {
-					StopAnimation();
+					AttackingAnimations();
 				}
 			} else {
-				AttackingAnimations();
+				DamagedAnimation();
 			}
 		} else {
-			DamagedAnimation();
+			DeadSprite();
 		}
+	}
+
+	void DeadSprite(){
+		/*
+		 * 29 down
+		 * 31 up
+		 * 33 left
+		 * 35 right
+		 */
+		int frame = 29;
+		if(characterProperties.looking == CharacterProperties.Looking.up)
+			frame = 31;
+		else if(characterProperties.looking == CharacterProperties.Looking.down)
+			frame = 29;
+		else if(characterProperties.looking == CharacterProperties.Looking.left)
+			frame = 33;
+		else if(characterProperties.looking == CharacterProperties.Looking.right)
+			frame = 35;
+
+		sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+frame);
 	}
 	public void Damage(){
 		damaged = true;

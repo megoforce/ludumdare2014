@@ -9,7 +9,6 @@ public class CharacterMotor : MonoBehaviour {
 	public AttackingTrigger down;
 	public GameObject attackExplosionPlayer;
 	public GameObject attackExplosionEnemy;
-	public bool alive;
 	public tk2dTileMap tileMap;
 	public AudioClip hurt;
 	GameObject myAttackExplosion;
@@ -24,7 +23,7 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform = transform;
 		characterProperties = GetComponent<CharacterProperties>();
 		myTransform.position = new Vector3(41,41,myTransform.position.z);
-		alive=true;
+		characterProperties.alive = true;
 		if(characterProperties.AI==false) {
 			GlobalStuff.instance.gUIManager.RefreshGUIValues();
 
@@ -40,47 +39,52 @@ public class CharacterMotor : MonoBehaviour {
 	void FixedUpdate () {
 
 		if(!characterProperties.AI){
-			// current tile
-			int x = (int)(transform.position.x*(256f/82f));
-			int y = (int)(transform.position.y*(256f/82f));
+			if(characterProperties.alive){
+				// current tile
+				int x = (int)(transform.position.x*(256f/82f));
+				int y = (int)(transform.position.y*(256f/82f));
 
-			x=x+1;
-			y=y+1;
-			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
-//				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
-				int currentTile = tileMap.GetTile(x,y,1);
-				//helath
-				if(currentTile == 7 || currentTile == 13){ 
-					GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
-					hp.transform.parent = myTransform;
-					tileMap.SetTile(x,y,1,-1);
-					if(Random.value < .5f){
-						characterProperties.health = (characterProperties.health+1 > 99) ? 99 : characterProperties.health+2;
-						PlayerPrefs.SetInt("health",characterProperties.health);
-						GlobalStuff.instance.gUIManager.RefreshGUIValues();
+				x=x+1;
+				y=y+1;
+				if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
+	//				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
+					int currentTile = tileMap.GetTile(x,y,1);
+					//helath
+					if(currentTile == 7 || currentTile == 13){ 
+						GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
+						hp.transform.parent = myTransform;
+						tileMap.SetTile(x,y,1,-1);
+						if(Random.value < .5f){
+							characterProperties.health = (characterProperties.health+1 > 99) ? 99 : characterProperties.health+2;
+							PlayerPrefs.SetInt("health",characterProperties.health);
+							GlobalStuff.instance.gUIManager.RefreshGUIValues();
+						}
+						tileMap.Build();
+					}else if(currentTile == 8 || currentTile == 1 || currentTile == 2){ //stone
+						GameObject hp = Instantiate(armorPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
+						hp.transform.parent = myTransform;
+						if(Random.value < .5f){
+							characterProperties.armor = (characterProperties.armor+1 > 99) ? 99 : characterProperties.armor+2;
+							PlayerPrefs.SetInt("armor",characterProperties.armor);
+							GlobalStuff.instance.gUIManager.RefreshGUIValues();
+						}
+
 					}
-					tileMap.Build();
-				}else if(currentTile == 8 || currentTile == 1 || currentTile == 2){ //stone
-					GameObject hp = Instantiate(armorPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
-					hp.transform.parent = myTransform;
-					if(Random.value < .5f){
-						characterProperties.armor = (characterProperties.armor+1 > 99) ? 99 : characterProperties.armor+2;
-						PlayerPrefs.SetInt("armor",characterProperties.armor);
-						GlobalStuff.instance.gUIManager.RefreshGUIValues();
-					}
+					//stones 8 1 2
 
 				}
-				//stones 8 1 2
 
 
-
+				InputDevice inputDevice = InputManager.ActiveDevice;
+				characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
+				characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
+				if(inputDevice.Action1.WasPressed && !characterProperties.attacking)
+					characterProperties.attacking = true;
+			} else {
+				characterProperties.horizontal = 0;
+				characterProperties.vertical = 0;
 			}
-			InputDevice inputDevice = InputManager.ActiveDevice;
-			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
-			characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
-			if(inputDevice.Action1.WasPressed && !characterProperties.attacking)
-				characterProperties.attacking = true;
-		} 
+		}
 		Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;
 
 
@@ -122,7 +126,7 @@ public class CharacterMotor : MonoBehaviour {
 	void Die() {
 		characterProperties.alive=false;
 		if(!characterProperties.AI){
-			Time.timeScale = 0;
+			//Time.timeScale = 0;
 			//TODO gui!!
 			//GameDataLoader.ResetData();
 			//Application.LoadLevel("home");

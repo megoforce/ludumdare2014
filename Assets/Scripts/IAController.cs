@@ -13,38 +13,39 @@ public class IAController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if(characterProperties.AI && characterProperties.alive==true){
+		if(characterProperties.AI){
+			if(characterProperties.alive){
+				//MOVE
+				float deltaX = playerTransform.position.x - myTransform.position.x;
+				float deltaY = playerTransform.position.y - myTransform.position.y;
 
-			//MOVE
-			float deltaX = playerTransform.position.x - myTransform.position.x;
-			float deltaY = playerTransform.position.y - myTransform.position.y;
+				if(deltaX > 0){
+					characterProperties.horizontal = .3f;
+				} else if (deltaY < 0){
+					characterProperties.horizontal = -.3f;
+				} else {
+					characterProperties.horizontal = 0;
+				}
 
-			if(deltaX > 0){
-				characterProperties.horizontal = .3f;
-			} else if (deltaY < 0){
-				characterProperties.horizontal = -.3f;
+				if(deltaY > 0){
+					characterProperties.vertical = .3f;
+				} else if (deltaY < 0){
+					characterProperties.vertical = -.3f;
+				} else {
+					characterProperties.vertical = 0;
+				}
+
+
+				//ATTACK
+				float d = Vector3.Distance(GlobalStuff.instance.player.transform.position,myTransform.position);
+
+				if(d < .5f && !characterProperties.attacking)
+					characterProperties.attacking = true;
 			} else {
 				characterProperties.horizontal = 0;
-			}
-
-			if(deltaY > 0){
-				characterProperties.vertical = .3f;
-			} else if (deltaY < 0){
-				characterProperties.vertical = -.3f;
-			} else {
 				characterProperties.vertical = 0;
 			}
-
-
-			//ATTACK
-			float d = Vector3.Distance(GlobalStuff.instance.player.transform.position,myTransform.position);
-
-			if(d < .5f && !characterProperties.attacking)
-				characterProperties.attacking = true;
-		} else {
-			characterProperties.horizontal = 0;
-			characterProperties.vertical = 0;
-		}
+		} 
 	}
 	
 }
