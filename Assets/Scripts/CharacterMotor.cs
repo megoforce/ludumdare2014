@@ -11,6 +11,7 @@ public class CharacterMotor : MonoBehaviour {
 	public GameObject attackExplosionEnemy;
 	public tk2dTileMap tileMap;
 	public AudioClip hurt;
+	public GameObject gameOverPrefab;
 	GameObject myAttackExplosion;
 
 	float ampVelocity = 30f;
@@ -126,10 +127,7 @@ public class CharacterMotor : MonoBehaviour {
 	void Die() {
 		characterProperties.alive=false;
 		if(!characterProperties.AI){
-			//Time.timeScale = 0;
-			//TODO gui!!
-			//GameDataLoader.ResetData();
-			//Application.LoadLevel("home");
+			Instantiate(gameOverPrefab);
 		}
 
 	}
