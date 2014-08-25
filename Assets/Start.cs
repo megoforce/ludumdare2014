@@ -12,7 +12,7 @@ public class Start : MonoBehaviour {
 		particles.SetActive(false);
 		intro.SetActive(true);
 		intro.GetComponent<IntroScript>().playintro=true;
-		//menu.FadeOut();
+		intro.GetComponent<IntroScript>().startAnimation();
 		//Application.LoadLevel("SomeLevel");
 	}
 
