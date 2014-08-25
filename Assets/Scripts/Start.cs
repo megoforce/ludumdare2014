@@ -11,7 +11,7 @@ public class Start : MonoBehaviour {
 	void Hola() {
 		tween.Play(true);
 
-		Screen.fullScreen = true;
+
 		startButton.SetActive(false);
 		//Application.LoadLevel("SomeLevel");
 	}
