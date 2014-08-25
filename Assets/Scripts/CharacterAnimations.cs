@@ -4,6 +4,8 @@ using System.Collections;
 public class CharacterAnimations : MonoBehaviour {
 	public tk2dSprite sprite;
 	CharacterProperties characterProperties;
+	public bool damaged;
+
 	public AudioClip step;
 	public AudioClip punch;
 	void Awake(){
@@ -15,24 +17,47 @@ public class CharacterAnimations : MonoBehaviour {
 	int attackingFramesCounter = 0;
 	void FixedUpdate(){
 		fCounter ++;
+		if(!damaged){
+			if(!characterProperties.attacking){
+				attackingFramesCounter = 0;
 
-		if(!characterProperties.attacking){
-			attackingFramesCounter = 0;
-
-			if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
-				if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
-					WalkH(characterProperties.horizontal);
-				} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
-					WalkV(characterProperties.vertical);
+				if(characterProperties.horizontal != 0 || characterProperties.vertical != 0){
+					if(Mathf.Abs(characterProperties.horizontal) >= Mathf.Abs(characterProperties.vertical)){
+						WalkH(characterProperties.horizontal);
+					} else if(Mathf.Abs(characterProperties.horizontal) <= Mathf.Abs(characterProperties.vertical)){
+						WalkV(characterProperties.vertical);
+					}
+				} else {
+					StopAnimation();
 				}
 			} else {
-				StopAnimation();
+				AttackingAnimations();
 			}
 		} else {
-			AttackingAnimations();
+			DamagedAnimation();
 		}
 	}
+	public void Damage(){
+		damaged = true;
+	}
+	void DamagedAnimation(){
+		/* 28 down 
+		 * 30 up
+		 * 32 left
+		 * 34 right
+		 */
+		int frame = 30;
+		if(characterProperties.looking == CharacterProperties.Looking.up)
+			frame = 30;
+		else if(characterProperties.looking == CharacterProperties.Looking.down)
+			frame = 28;
+		else if(characterProperties.looking == CharacterProperties.Looking.left)
+			frame = 32;
+		else if(characterProperties.looking == CharacterProperties.Looking.right)
+			frame = 34;
 
+		sprite.spriteId = sprite.GetSpriteIdByName(characterProperties.spriteName+"/"+frame);
+	}
 	/*
 	 * STOP
 	 * */
@@ -88,10 +113,6 @@ public class CharacterAnimations : MonoBehaviour {
 
 
 	}
-
-
-
-
 	/*	WALK
 		0 1 2 down
 		3 4 5 left

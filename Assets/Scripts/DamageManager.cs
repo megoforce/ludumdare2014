@@ -8,11 +8,14 @@ public class DamageManager : MonoBehaviour {
 	}
 	public void Damage(){
 		characterAnimations.sprite.color = Color.red;
+
+
 		StartCoroutine(OffDamageEffects(.3f));
 	}
 
 	IEnumerator OffDamageEffects(float delay){
 		yield return new WaitForSeconds(delay);
+		characterAnimations.damaged = false;
 		characterAnimations.sprite.color = Color.white;
 	}
 }

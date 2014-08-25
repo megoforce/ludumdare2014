@@ -11,19 +11,20 @@ public class AttackingTrigger : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other){
 
-		if(characterProperties.spriteName == "player" && other.tag == "NotPlayer"){
+		if(characterProperties.tag == "Player" && other.tag == "NotPlayer"){
 			inColliderObjects.Add(other.gameObject);
 		}
-		if(characterProperties.spriteName == "enemy" && other.tag == "Player"){
+		if(characterProperties.tag == "NotPlayer" && other.tag == "Player"){
+
 			inColliderObjects.Add(other.gameObject);
 		}
 	}
 
 	void OnTriggerExit(Collider other){
-		if(characterProperties.spriteName == "player" && other.tag == "NotPlayer"){
+		if(characterProperties.tag == "Player" && other.tag == "NotPlayer"){
 			inColliderObjects.Remove(other.gameObject);
 		}
-		if(characterProperties.spriteName == "enemy" && other.tag == "Player"){
+		if(characterProperties.tag == "NotPlayer" && other.tag == "Player"){
 			inColliderObjects.Remove(other.gameObject);
 		}
 	}

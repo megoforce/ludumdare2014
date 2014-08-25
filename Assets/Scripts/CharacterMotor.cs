@@ -97,18 +97,17 @@ public class CharacterMotor : MonoBehaviour {
 		if(!characterProperties.AI)
 			MonophonicTracks.instance.Play(hurt,10,1,.5f);
 
-		if(characterProperties.alive==true) {
+		if(characterProperties.alive) {
 			int damage=(int)fdamage;
 			int finaldamage=damage;
 			if(RandomExt.RandomFloatBetween(0,100) < characterProperties.armor) {
 				finaldamage=(finaldamage-(characterProperties.armor/10));
 				characterProperties.armor=characterProperties.armor-damage;
 			} 
-			if(finaldamage<0) finaldamage=0;
-			if(characterProperties.armor<0) characterProperties.armor=0;
-			characterProperties.health=characterProperties.health-finaldamage;
-			if(characterProperties.AI==false) {
-
+			if(finaldamage<0) finaldamage = 0;
+			if(characterProperties.armor < 0) characterProperties.armor=0;
+			characterProperties.health = characterProperties.health-finaldamage;
+			if(!characterProperties.AI) {
 				PlayerPrefs.SetInt("health",characterProperties.health);
 				PlayerPrefs.SetInt("armor",characterProperties.armor);
 				GlobalStuff.instance.gUIManager.RefreshGUIValues();

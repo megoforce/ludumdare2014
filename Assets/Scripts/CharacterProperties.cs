@@ -47,6 +47,7 @@ public class CharacterProperties : MonoBehaviour {
 		for(int i = 0; i < 5; i++)
 			if(PlayerPrefs.GetInt("card-"+(i+1)) == 1)
 				cardsCounter++;
+
 		level = cardsCounter;
 		spriteName = "player-"+level;
 		health = PlayerPrefs.GetInt("health");
