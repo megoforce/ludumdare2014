@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class Totem : MonoBehaviour {
-	int totemID = 1;
+	int totemID = 0;
 	public void Init(int totemID){
-
+		
 	}
 
 }
