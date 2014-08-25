@@ -48,14 +48,17 @@ public class CharacterMotor : MonoBehaviour {
 			if(x>0 && x<tileMap.width && y>0 && y<tileMap.height) {
 //				print(x+","+y+" = "+tileMap.GetTile(x,y,1));
 				int currentTile = tileMap.GetTile(x,y,1);
-				if(currentTile == 7 || currentTile == 13){ //helath
+				//helath
+				if(currentTile == 7 || currentTile == 13){ 
 					GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
 					hp.transform.parent = myTransform;
+					tileMap.SetTile(x,y,1,-1);
 					if(Random.value < .5f){
 						characterProperties.health = (characterProperties.health+1 > 99) ? 99 : characterProperties.health+2;
 						PlayerPrefs.SetInt("health",characterProperties.health);
 						RefreshStatusMessage();
 					}
+					tileMap.Build();
 				}else if(currentTile == 8 || currentTile == 1 || currentTile == 2){ //stone
 					GameObject hp = Instantiate(armorPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
 					hp.transform.parent = myTransform;
