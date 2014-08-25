@@ -4,6 +4,7 @@ using System.Collections;
 public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
 	public CameraFilterPack_Colors_HUE_Rotate hueCamera;
+	public CameraFilterPack_Distortion_Dream2 dreamCamera;
 	public GameObject totemPrefab;
 
 	void Start() {
@@ -187,12 +188,15 @@ public class WorldGenerator : MonoBehaviour {
 			print("ICE TOTEM!");
 		}
 		if(temperature > 25f){
+			dreamCamera.enabled = true;
 			GameObject totemi = Instantiate (totemPrefab) as GameObject;
 			Totem totem = totemi.GetComponent<Totem> ();
 			float r = RandomExt.RandomFloatBetween(20,80);
 			float alpha = Random.value*Mathf.PI*2f;
 			totem.Init(0,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
 			print("SUN TOTEM!");
+		} else {
+			dreamCamera.enabled = false;
 		}
 		if(humidity < 50){ 
 			GameObject totemi = Instantiate (totemPrefab) as GameObject;
@@ -225,10 +229,10 @@ public class WorldGenerator : MonoBehaviour {
 		if(temp < 0){
 			Camera.main.GetComponent<Vignetting>().enabled = true;
 		} else {
-
 			Camera.main.GetComponent<Vignetting>().enabled = false;
 			
 		}
+
 
 		temp = Mathf.Min(Mathf.Max(-20,temp),40);
 		float r = (temp+20f) / 60f;
