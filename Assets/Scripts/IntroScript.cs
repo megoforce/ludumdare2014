@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class IntroScript : MonoBehaviour {
 	public tk2dTextMesh maestroObject;
@@ -95,6 +96,11 @@ public class IntroScript : MonoBehaviour {
 
 			//turn off master
 			objectMaestro.SetActive(false);
+		}
+
+		InputDevice inputDevice = InputManager.ActiveDevice;
+		if(playintro && inputDevice.Action1.WasPressed){
+			Application.LoadLevel("home");
 		}
 	}
 }
