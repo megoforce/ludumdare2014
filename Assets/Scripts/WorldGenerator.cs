@@ -4,6 +4,7 @@ using System.Collections;
 public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
 	public CameraFilterPack_Colors_HUE_Rotate hueCamera;
+
 	void Start() {
 
 		tileMap.width=256;
@@ -132,7 +133,13 @@ public class WorldGenerator : MonoBehaviour {
 	}
 
 	void SetTemperatureColor(float temp){
+		if(temp < 0){
+			Camera.main.GetComponent<Vignetting>().enabled = true;
+		} else {
 
+			Camera.main.GetComponent<Vignetting>().enabled = false;
+			
+		}
 
 		temp = Mathf.Min(Mathf.Max(-20,temp),40);
 		float r = (temp+20f) / 60f;

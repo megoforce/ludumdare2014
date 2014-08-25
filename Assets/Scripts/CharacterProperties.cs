@@ -3,13 +3,14 @@ using System.Collections;
 
 public class CharacterProperties : MonoBehaviour {
 	public bool AI = false;
-	public float health = 100f;
+	public int health = 99;
+	public int armor = 99;
 	public float horizontal;
 	public float vertical;
 	public string spriteName;
 	public bool attacking = false;
 	public bool alive=true;
-	public int armor=100;
+
 	public enum Looking{up,right,left,down};
 	public Looking looking = Looking.down;
 	CharacterAnimations characterAnimations;

@@ -16,6 +16,7 @@ public class GameDataLoader : MonoBehaviour {
 	public float pressure;
 	public float weather;
 	public float wind;
+	public AudioClip connecting;
 
 	void Start() {
 
@@ -23,7 +24,6 @@ public class GameDataLoader : MonoBehaviour {
 			print("reset lat lng");
 			PlayerPrefs.SetFloat("lat",RandomExt.RandomFloatBetween(-90,90));
 			PlayerPrefs.SetFloat("lng",RandomExt.RandomFloatBetween(-180,180));
-
 		}
 		GlobalStuff.instance.lat = PlayerPrefs.GetFloat("lat");
 		GlobalStuff.instance.lng = PlayerPrefs.GetFloat("lng");
@@ -31,7 +31,8 @@ public class GameDataLoader : MonoBehaviour {
 		StartCoroutine(SearchWeatherData());
 	}
 	IEnumerator SearchWeatherData() {
-		GlobalStuff.instance.gUIManager.label1.text = "CONNECTING... [LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"]";
+		MonophonicTracks.instance.Play(connecting,1,RandomExt.RandomFloatBetween(.9f,1.1f));
+		GlobalStuff.instance.gUIManager.label1.text = "[LAT: "+GlobalStuff.instance.lat+",LNG: "+GlobalStuff.instance.lng+"]...CONNECTING";
 		GlobalStuff.instance.gUIManager.label2.text = "Searching for weather data...";
 
 		Debug.Log (GlobalStuff.instance.lat);
@@ -63,7 +64,8 @@ public class GameDataLoader : MonoBehaviour {
 				Application.LoadLevel("home");
 			}
 			Debug.Log(N);
-			country=N["sys"]["country"].Value;
+
+			country=CountryConverter.CodeToName(N["sys"]["country"].Value);
 			temperature=float.Parse(N["main"]["temp"].Value);
 			humidity=float.Parse(N["main"]["humidity"].Value);
 			pressure=float.Parse(N["main"]["pressure"].Value);
@@ -78,10 +80,9 @@ public class GameDataLoader : MonoBehaviour {
 			GlobalStuff.instance.gUIManager.label2.text = "TEMP:"+Mathf.Round(temperature).ToString()+"C HUMIDITY:"+humidity.ToString()+" PRESSURE: "+pressure.ToString()+" SKY:"+skyname.ToUpper() + " WIND:" + wind.ToString();
 			
 			StartCoroutine(GlitchesOff());
-			GlobalStuff.instance.enemyGenerator.GenerateEnemies();
-			
-			
-			
+
+
+
 		}
 		else
 		{
@@ -103,9 +104,13 @@ public class GameDataLoader : MonoBehaviour {
 
 	IEnumerator GlitchesOff(){
 		GlobalStuff.instance.gUIManager.glitchEffect.enabled = false;
+		MonophonicTracks.instance.Stop(1);
 		yield return new WaitForSeconds(1f);
+
+		GlobalStuff.instance.enemyGenerator.GenerateEnemies();
 		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
+
 	}
 }
 
