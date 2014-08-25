@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: e6bdd4952af7748338a11db2fbe2982d
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: irenko-logo
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

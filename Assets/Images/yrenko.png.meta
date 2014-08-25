@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 515f0df226e094a028ec33e191315315
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: yrenko
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
