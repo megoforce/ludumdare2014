@@ -8,7 +8,6 @@ public class StartButton : MonoBehaviour {
 	public void OnClick(){
 		containerIntro.Play(true);
 		tweenAlphaFade.Play(true);
-		Screen.fullScreen = true;
 		MonophonicTracks.instance.Play(clickSound);
 	}
 }
