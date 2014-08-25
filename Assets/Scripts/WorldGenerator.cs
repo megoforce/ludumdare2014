@@ -65,7 +65,7 @@ public class WorldGenerator : MonoBehaviour {
 					tileMap.Layers[5].SetTile(x,y,10);
 
 					// check borders, north
-					if (x-1 >= 0 && tileMap.Layers[5].GetTile(x-1, y) == -1) {
+					/*if (x-1 >= 0 && tileMap.Layers[5].GetTile(x-1, y) == -1) {
 						tileMap.Layers[5].SetTile(x-1, y, 4);
 					}
 
@@ -102,7 +102,7 @@ public class WorldGenerator : MonoBehaviour {
 					// check borders, southwest
 					if (x+1 < tileMap.width && y+1 < tileMap.height && tileMap.Layers[5].GetTile(x+1, y+1) == -1) {
 						tileMap.Layers[5].SetTile(x+1, y+1, 17);
-					}
+					}*/
 
 				}
 			}
