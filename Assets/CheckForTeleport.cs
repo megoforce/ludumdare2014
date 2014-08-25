@@ -23,22 +23,31 @@ public class CheckForTeleport : MonoBehaviour {
 				if(myTransofrm.position.y > 82f-15f){ //NORTH
 					teleporting = true;
 					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
-					teleportingInstance.GetComponent<TeleportingText>().Teleporting("NORTH");
+					PlayerPrefs.SetString("direction","NORTH");
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting();
+
 					MonophonicTracks.instance.Play(teleportingFX,1,RandomExt.RandomFloatBetween(.9f,1.1f));
 				} else if(myTransofrm.position.y < 15f){ //SOUTH
 					teleporting = true;
 					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
-					teleportingInstance.GetComponent<TeleportingText>().Teleporting("SOUTH");
+					PlayerPrefs.SetString("direction","SOUTH");
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting();
+
 					MonophonicTracks.instance.Play(teleportingFX,1,RandomExt.RandomFloatBetween(.9f,1.1f));
+
 				} else if(myTransofrm.position.x < 15f){ //WEST
 					teleporting = true;
 					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
-					teleportingInstance.GetComponent<TeleportingText>().Teleporting("WEST");
+					PlayerPrefs.SetString("direction","WEST");
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting();
+
 					MonophonicTracks.instance.Play(teleportingFX,1,RandomExt.RandomFloatBetween(.9f,1.1f));
 				} else if(myTransofrm.position.x > 82f-15f){ //EAST
 					teleporting = true;
+					PlayerPrefs.SetString("direction","EAST");
 					teleportingInstance = Instantiate(teleportingPrefab) as GameObject;
-					teleportingInstance.GetComponent<TeleportingText>().Teleporting("EAST");
+					teleportingInstance.GetComponent<TeleportingText>().Teleporting();
+
 					MonophonicTracks.instance.Play(teleportingFX,1,RandomExt.RandomFloatBetween(.9f,1.1f));
 				}
 			} else {
@@ -52,6 +61,44 @@ public class CheckForTeleport : MonoBehaviour {
 		}
 	}
 
+	public  static void SetNextChunkTeleport(){
+		print("SetNextChunkTeleport()!!!"+PlayerPrefs.GetString("direction"));
+		string direction = PlayerPrefs.GetString("direction");
+		if(direction == "NORTH"){
+			float lat = PlayerPrefs.GetFloat("lat");
+			if(lat+10 > 90){
+				lat -= 170;
+			} else {
+				lat += 10;
+			}
+			PlayerPrefs.SetFloat("lat",lat);
+		} else if(direction == "SOUTH"){
+			float lat = PlayerPrefs.GetFloat("lat");
+			if(lat-10 < -90){
+				lat += 170;
+			} else {
+				lat -= 10;
+			}
+			PlayerPrefs.SetFloat("lat",lat);
+		} else if(direction == "WEST"){
+			float lng = PlayerPrefs.GetFloat("lng");
+			if(lng-10 < -180){
+				lng += 350;
+			} else {
+				lng -= 10;
+			}
+			PlayerPrefs.SetFloat("lng",lng);
+		} else if(direction == "EAST"){
+			
+			float lng = PlayerPrefs.GetFloat("lng");
+			if(lng+10 > 180){
+				lng -= 350;
+			} else {
+				lng += 10;
+			}
+			PlayerPrefs.SetFloat("lng",lng);
+		}
 
+	}
 
 }
