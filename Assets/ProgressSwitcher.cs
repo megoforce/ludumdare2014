@@ -2,19 +2,20 @@
 using System.Collections;
 
 public class ProgressSwitcher : MonoBehaviour {
-	public Collider backCollider;
-	public TweenAlpha tweenFade;
+
+	public GameObject progress;
+
 	public void Show(){
-		tweenFade.ResetToBeginning();
-		tweenFade.Play(true);
-		backCollider.enabled = true;
+
+		GlobalStuff.instance.paused = true;
+		progress.SetActive(true);
 		Time.timeScale = 0;
+		
 	}
 
 	public void Hide(){
+		GlobalStuff.instance.paused = false;
 		Time.timeScale = 1;
-		tweenFade.ResetToBeginning();
-		tweenFade.Play(false);
-		backCollider.enabled = false;
+		progress.SetActive(false);
 	}
 }
