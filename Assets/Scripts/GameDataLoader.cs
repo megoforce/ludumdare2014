@@ -6,8 +6,6 @@ using SimpleJSON;
 public class GameDataLoader : MonoBehaviour {
 	public bool forceReset = false;
 	public WorldGenerator worldGenerator;
-
-
 	public string country;
 	string weatherName;
 	public string skyname;

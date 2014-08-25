@@ -14,7 +14,7 @@ public class CharacterMotor : MonoBehaviour {
 	public AudioClip hurt;
 	GameObject myAttackExplosion;
 
-	float ampVelocity = 70f;
+	float ampVelocity = 30f;
 	Transform myTransform;
 	public Rigidbody myRigidbody;
 
@@ -57,7 +57,7 @@ public class CharacterMotor : MonoBehaviour {
 						RefreshStatusMessage();
 					}
 				}else if(currentTile == 8 || currentTile == 1 || currentTile == 2){ //stone
-					GameObject hp = Instantiate(healthPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
+					GameObject hp = Instantiate(armorPrefab,new Vector3(myTransform.position.x, myTransform.position.y, myTransform.position.z-.5f),Quaternion.identity) as GameObject;
 					hp.transform.parent = myTransform;
 					if(Random.value < .5f){
 						characterProperties.armor = (characterProperties.armor+1 > 99) ? 99 : characterProperties.armor+2;
@@ -79,8 +79,7 @@ public class CharacterMotor : MonoBehaviour {
 		} 
 		Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;
 
-		if(characterProperties.AI)
-			f*=.8f;
+
 
 		myRigidbody.AddForce(f);
 
