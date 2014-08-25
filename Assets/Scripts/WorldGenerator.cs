@@ -64,7 +64,45 @@ public class WorldGenerator : MonoBehaviour {
 				if(Mathf.PerlinNoise(x*.07f+Mathf.Round(lat),y*.07f+Mathf.Round(lng)) < .3f){
 					tileMap.Layers[5].SetTile(x,y,10);
 
+          // check borders, north
+          if (tileMap.Layers[5].GetTile(x-1, y) == -1) {
+            tileMap.Layers[5].SetTile(x-1, y, 4);
+          }
 
+          // check borders, south
+          if (tileMap.Layers[5].GetTile(x+1, y) == -1) {
+            tileMap.Layers[5].SetTile(x+1, y, 16);
+          }
+
+          // check borders, east
+          if (tileMap.Layers[5].GetTile(x, y-1) == -1) {
+            tileMap.Layers[5].SetTile(x, y-1, 9);
+          }
+
+          // check borders, west
+          if (tileMap.Layers[5].GetTile(x, y+1) == -1) {
+            tileMap.Layers[5].SetTile(x, y+1, 11);
+          }
+
+          // check borders, northeast
+          if (tileMap.Layers[5].GetTile(x-1, y-1) == -1) {
+            tileMap.Layers[5].SetTile(x-1, y-1, 3);
+          }
+
+          // check borders, northwest
+          if (tileMap.Layers[5].GetTile(x-1, y+1) == -1) {
+            tileMap.Layers[5].SetTile(x-1, y+1, 5);
+          }
+
+          // check borders, southeast
+          if (tileMap.Layers[5].GetTile(x+1, y-1) == -1) {
+            tileMap.Layers[5].SetTile(x+1, y-1, 15);
+          }
+
+          // check borders, southwest
+          if (tileMap.Layers[5].GetTile(x+1, y+1) == -1) {
+            tileMap.Layers[5].SetTile(x+1, y+1, 17);
+          }
 
 				}
 			}
