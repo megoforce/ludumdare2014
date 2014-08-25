@@ -26,7 +26,8 @@ public class CharacterMotor : MonoBehaviour {
 		myTransform.position = new Vector3(41,41,myTransform.position.z);
 		alive=true;
 		if(characterProperties.AI==false) {
-			RefreshStatusMessage();
+			GlobalStuff.instance.gUIManager.RefreshGUIValues();
+
 		}
 	}
 	void Start(){
@@ -56,7 +57,7 @@ public class CharacterMotor : MonoBehaviour {
 					if(Random.value < .5f){
 						characterProperties.health = (characterProperties.health+1 > 99) ? 99 : characterProperties.health+2;
 						PlayerPrefs.SetInt("health",characterProperties.health);
-						RefreshStatusMessage();
+						GlobalStuff.instance.gUIManager.RefreshGUIValues();
 					}
 					tileMap.Build();
 				}else if(currentTile == 8 || currentTile == 1 || currentTile == 2){ //stone
@@ -65,7 +66,7 @@ public class CharacterMotor : MonoBehaviour {
 					if(Random.value < .5f){
 						characterProperties.armor = (characterProperties.armor+1 > 99) ? 99 : characterProperties.armor+2;
 						PlayerPrefs.SetInt("armor",characterProperties.armor);
-						RefreshStatusMessage();
+						GlobalStuff.instance.gUIManager.RefreshGUIValues();
 					}
 
 				}
@@ -107,7 +108,10 @@ public class CharacterMotor : MonoBehaviour {
 			if(characterProperties.armor<0) characterProperties.armor=0;
 			characterProperties.health=characterProperties.health-finaldamage;
 			if(characterProperties.AI==false) {
-				RefreshStatusMessage();
+
+				PlayerPrefs.SetInt("health",characterProperties.health);
+				PlayerPrefs.SetInt("armor",characterProperties.armor);
+				GlobalStuff.instance.gUIManager.RefreshGUIValues();
 			}
 //			Debug.Log("d: "+damage.ToString()+" fd:"+finaldamage.ToString());
 			if(characterProperties.health<1) Die();
@@ -115,14 +119,7 @@ public class CharacterMotor : MonoBehaviour {
 		}
 
 	}
-	void RefreshStatusMessage() {
-		PlayerPrefs.SetInt("hp",characterProperties.health);
-		PlayerPrefs.SetInt("armor",characterProperties.armor);
 
-		GlobalStuff.instance.gUIManager.hp.text=characterProperties.health.ToString();
-		GlobalStuff.instance.gUIManager.armor.text=characterProperties.armor.ToString();
-		GlobalStuff.instance.gUIManager.keys.text=PlayerPrefs.GetInt("keys").ToString() +"/5";
-	}
 	void Die() {
 		characterProperties.alive=false;
 		if(!characterProperties.AI){

@@ -22,7 +22,15 @@ public class CharacterProperties : MonoBehaviour {
 		characterAnimations.sprite.spriteId = characterAnimations.sprite.GetSpriteIdByName(spriteName+"/1");
 		tag = (enemy) ? "NotPlayer" : "Player";
 		characterAnimations.sprite.gameObject.tag = (enemy) ? "NotPlayerSprite" : "PlayerSprite";
-	}
 
+	}
+	void Start(){
+		if(!AI){
+			print("adslkjkjlasdkljadsjklasdkjladskljkljdakjldsaklj");
+			health = PlayerPrefs.GetInt("health");
+			armor = PlayerPrefs.GetInt("armor");
+			GlobalStuff.instance.gUIManager.RefreshGUIValues();
+		}
+	}
 
 }

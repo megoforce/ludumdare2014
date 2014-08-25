@@ -118,7 +118,14 @@ public class GameDataLoader : MonoBehaviour {
 		Debug.Log("Reset Data!");
 		PlayerPrefs.DeleteAll();
 		PlayerPrefs.SetInt("isNotFirstTime",1);
-		
+		PlayerPrefs.SetInt("card-1",0);
+		PlayerPrefs.SetInt("card-2",0);
+		PlayerPrefs.SetInt("card-3",0);
+		PlayerPrefs.SetInt("card-4",0);
+		PlayerPrefs.SetInt("card-5",0);
+		PlayerPrefs.SetString("direction","NORTH");
+		PlayerPrefs.SetFloat ("lat", RandomExt.RandomFloatBetween (-90, 90));
+		PlayerPrefs.SetFloat ("lng", RandomExt.RandomFloatBetween (-180, 180));
 	}
 
 	IEnumerator GlitchesOff(){
