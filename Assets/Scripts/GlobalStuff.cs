@@ -9,7 +9,7 @@ public class GlobalStuff : MonoBehaviour {
 	public WorldGenerator worldGenerator;
 	public float lat = 0;
 	public float lng = 0;
-
+	public bool paused = false;
 	void Awake(){
 		if(instance == null){
 			instance = this;

@@ -74,7 +74,7 @@ public class CharacterMotor : MonoBehaviour {
 			InputDevice inputDevice = InputManager.ActiveDevice;
 			characterProperties.horizontal = inputDevice.LeftStick.Right.LastValue - inputDevice.LeftStick.Left.LastValue;
 			characterProperties.vertical = inputDevice.LeftStick.Up.LastValue - inputDevice.LeftStick.Down.LastValue;
-			if(inputDevice.Action1.IsPressed && !characterProperties.attacking)
+			if(inputDevice.Action1.WasPressed && !characterProperties.attacking)
 				characterProperties.attacking = true;
 		} 
 		Vector3 f = (characterProperties.horizontal*Vector3.right + characterProperties.vertical*Vector3.up)*ampVelocity;

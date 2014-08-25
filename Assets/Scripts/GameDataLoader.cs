@@ -70,6 +70,7 @@ public class GameDataLoader : MonoBehaviour {
 			humidity=float.Parse(N["main"]["humidity"].Value);
 			pressure=float.Parse(N["main"]["pressure"].Value);
 			wind = float.Parse(N["wind"]["speed"].Value);
+
 			weatherName=N["name"];
 			Debug.Log(N["weather"][0]["id"].Value);
 			
