@@ -10,7 +10,8 @@ public class CharacterProperties : MonoBehaviour {
 	public string spriteName;
 	public bool attacking = false;
 	public bool alive=true;
-
+	public int power=1;
+	public int speed=1;
 	public enum Looking{up,right,left,down};
 	public Looking looking = Looking.down;
 	CharacterAnimations characterAnimations;
