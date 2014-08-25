@@ -4,6 +4,7 @@ using System.Collections;
 public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
 	public CameraFilterPack_Colors_HUE_Rotate hueCamera;
+	public GameObject totemPrefab;
 
 	void Start() {
 
