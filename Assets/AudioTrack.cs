@@ -15,6 +15,7 @@ public class AudioTrack : MonoBehaviour {
 		float speed = Random.Range (0, 100);
 		wind.pitch = speed*0.0004f;
 		music.volume = 0;
+		synth.volume = 0;
 		musicup = true;
 		synthup = true;
 		chorusup = false;

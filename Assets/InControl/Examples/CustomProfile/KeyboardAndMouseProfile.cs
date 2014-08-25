@@ -42,25 +42,26 @@ namespace CustomProfileExample
 					Handle = "Fire - Keyboard",
 					Target = InputControlType.Action1,
 					// KeyCodeButton fires when any of the provided KeyCode params are down.
-					Source = KeyCodeButton( KeyCode.F, KeyCode.Return )
+					Source = KeyCodeButton( KeyCode.Space ),
 				},
 				new InputControlMapping
 				{
 					Handle = "AltFire",
 					Target = InputControlType.Action2,
-					Source = MouseButton2
+					Source = MouseScrollWheel
 				},
 				new InputControlMapping
 				{
 					Handle = "Middle",
 					Target = InputControlType.Action3,
-					Source = MouseButton1
+					Source = KeyCodeButton( KeyCode.Return )
+					
 				},
 				new InputControlMapping
 				{
 					Handle = "Jump",
 					Target = InputControlType.Action4,
-					Source = KeyCodeButton( KeyCode.Space )
+					Source = KeyCodeButton( KeyCode.LeftAlt )
 				},
 				new InputControlMapping
 				{
