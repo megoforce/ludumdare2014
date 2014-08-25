@@ -5,6 +5,7 @@ public class WorldGenerator : MonoBehaviour {
 	public tk2dTileMap tileMap;
 	public CameraFilterPack_Colors_HUE_Rotate hueCamera;
 	public CameraFilterPack_Distortion_Dream2 dreamCamera;
+	public GameObject rain;
 	public GameObject totemPrefab;
 
 	void Start() {
@@ -177,6 +178,7 @@ public class WorldGenerator : MonoBehaviour {
 			float r = RandomExt.RandomFloatBetween(20,80);
 			float alpha = Random.value*Mathf.PI*2f;
 			totem.Init(1,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
+			rain.SetActive(true);
 			print("RAIN TOTEM!");
 		}
 		if(temperature<-5){
