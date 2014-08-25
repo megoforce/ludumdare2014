@@ -80,6 +80,8 @@ public class GameDataLoader : MonoBehaviour {
 						Debug.Log("sea level "+sealevel.ToString()+" grnd level:"+groundlevel.ToString());
 					}
 				
+				} else {
+					island = true;
 				}
 				
 				if(!island) {
