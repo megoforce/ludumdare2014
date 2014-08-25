@@ -167,7 +167,11 @@ public class WorldGenerator : MonoBehaviour {
 			}
 		}
 		tileMap.ForceBuild();
-
+		// totem 
+		GameObject totemi=Instantiate (totemPrefab);
+		Totem totem = totemi.GetComponent<Totem> ();
+		totem.Init (Random.Range (0, 5));
+	}
 		SetTemperatureColor(temperature);
 	}
 
