@@ -13,7 +13,7 @@ public class WorldGenerator : MonoBehaviour {
 	}
 
 
-	public void GenerateWorld(float temperature, float humidity, float pressure, string skyname,float lat, float lng){
+	public void GenerateWorld(float temperature, float humidity, float pressure, string skyname,float wind,float lat, float lng){
 		
 		//Floor
 		int floorTileId = 0;
@@ -167,10 +167,56 @@ public class WorldGenerator : MonoBehaviour {
 			}
 		}
 		tileMap.ForceBuild();
-		// totem 
-		GameObject totemi=Instantiate (totemPrefab) as GameObject;
-		Totem totem = totemi.GetComponent<Totem> ();
-		totem.Init(Random.Range(0,5),125,130);
+
+		// Totem
+
+		if(skyname.ToUpper().Contains("RAIN")){
+			GameObject totemi = Instantiate (totemPrefab) as GameObject;
+			Totem totem = totemi.GetComponent<Totem> ();
+			float r = RandomExt.RandomFloatBetween(20,80);
+			float alpha = Random.value*Mathf.PI*2f;
+			totem.Init(1,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
+			print("RAIN TOTEM!");
+		}
+		if(temperature<-5){
+			GameObject totemi = Instantiate (totemPrefab) as GameObject;
+			Totem totem = totemi.GetComponent<Totem> ();
+			float r = RandomExt.RandomFloatBetween(20,80);
+			float alpha = Random.value*Mathf.PI*2f;
+			totem.Init(2,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
+			print("ICE TOTEM!");
+		}
+		if(temperature > 25f){
+			GameObject totemi = Instantiate (totemPrefab) as GameObject;
+			Totem totem = totemi.GetComponent<Totem> ();
+			float r = RandomExt.RandomFloatBetween(20,80);
+			float alpha = Random.value*Mathf.PI*2f;
+			totem.Init(0,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
+			print("SUN TOTEM!");
+		}
+		if(humidity < 50){ 
+			GameObject totemi = Instantiate (totemPrefab) as GameObject;
+			Totem totem = totemi.GetComponent<Totem> ();
+			float r = RandomExt.RandomFloatBetween(20,80);
+			float alpha = Random.value*Mathf.PI*2f;
+			totem.Init(3,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
+			print("EARTH TOTEM!");
+		} 
+		if(Mathf.Abs(wind) > 10){
+			GameObject totemi = Instantiate (totemPrefab) as GameObject;
+			Totem totem = totemi.GetComponent<Totem> ();
+			float r = RandomExt.RandomFloatBetween(20,80);
+			float alpha = Random.value*Mathf.PI*2f;
+			totem.Init(4,125+(int)(r*Mathf.Sin(alpha)),125+(int)(r*Mathf.Cos(alpha)));
+			print("WIND TOTEM!");
+		}
+/*
+		for(int i = 0; i < 5;i++){
+			GameObject totemi = Instantiate (totemPrefab) as GameObject;
+			Totem totem = totemi.GetComponent<Totem> ();
+			totem.Init(i,125+i,125);
+		}
+*/
 	
 		SetTemperatureColor(temperature);
 	}

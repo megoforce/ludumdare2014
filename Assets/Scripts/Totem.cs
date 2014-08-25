@@ -31,6 +31,15 @@ public class Totem : MonoBehaviour {
 		if(other.tag == "Player" && !discovered){
 			PlayerPrefs.SetInt("card-"+(totemID+1),1);
 
+			int cardsCounter = 0;
+			for(int i = 0; i < 5; i++)
+				if(PlayerPrefs.GetInt("card-"+(i+1)) == 1)
+					cardsCounter++;
+
+			if(cardsCounter == 5){
+				StartCoroutine(Won());
+			}
+
 			GameObject card =  Instantiate(cardAnimation) as GameObject;
 
 			card.BroadcastMessage("Init",totemID);
@@ -38,6 +47,10 @@ public class Totem : MonoBehaviour {
 			Refresh();
 			
 		}
+	}
+	IEnumerator Won(){
+		yield return new WaitForSeconds(.5f);
+		Application.LoadLevel("win");
 	}
 
 

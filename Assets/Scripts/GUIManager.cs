@@ -36,6 +36,7 @@ public class GUIManager : MonoBehaviour {
 			if(PlayerPrefs.GetInt("card-"+(i+1)) == 1)
 				cardsCounter++;
 
+
 		cards.text = cardsCounter.ToString()+"/5";
 		refreshProgressCards.Refresh();
 

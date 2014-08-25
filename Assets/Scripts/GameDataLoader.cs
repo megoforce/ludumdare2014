@@ -41,11 +41,11 @@ public class GameDataLoader : MonoBehaviour {
 			GlobalStuff.instance.gUIManager.label1.text = "[LAT: " + GlobalStuff.instance.lat + ",LNG: " + GlobalStuff.instance.lng + "]...CONNECTING";
 			GlobalStuff.instance.gUIManager.label2.text = "Searching for weather data...";
 
-			Debug.Log (GlobalStuff.instance.lat);
+//			Debug.Log (GlobalStuff.instance.lat);
 			string url = "http://api.openweathermap.org/data/2.5/weather?lat=" + GlobalStuff.instance.lat.ToString () + "&lon=" + GlobalStuff.instance.lng.ToString () + "&units=metric";
-			Debug.Log (url);
+//			Debug.Log (url);
 			WWW request = new WWW (url);
-			Debug.Log (request);
+//			Debug.Log (request);
 			yield return request;
 
 			if (request.error == null || request.error == "") {
@@ -68,14 +68,14 @@ public class GameDataLoader : MonoBehaviour {
 						PlayerPrefs.SetFloat ("lng", RandomExt.RandomFloatBetween (-180, 180));
 						Application.LoadLevel ("home");
 				}
-				Debug.Log (N);
+//				Debug.Log (N);
 				if(N ["main"]["sea_level"]!=null) {
 					float sealevel = float.Parse (N ["main"]["sea_level"].Value);
 					float groundlevel = float.Parse (N ["main"] ["grnd_level"].Value);
 					if (sealevel < groundlevel) {
 						island = true;
 					} else {
-						Debug.Log("sea level "+sealevel.ToString()+" grnd level:"+groundlevel.ToString());
+//						Debug.Log("sea level "+sealevel.ToString()+" grnd level:"+groundlevel.ToString());
 					}
 				
 				} else {
@@ -92,7 +92,7 @@ public class GameDataLoader : MonoBehaviour {
 				pressure = float.Parse (N ["main"] ["pressure"].Value);
 				wind = float.Parse (N ["wind"] ["speed"].Value);
 				weatherName = N ["name"];
-				Debug.Log (N ["weather"] [0] ["id"].Value);
+//				Debug.Log (N ["weather"] [0] ["id"].Value);
 
 				weather = float.Parse (N ["weather"] [0] ["id"].Value);
 				skyname = N ["weather"] [0] ["main"].Value;
@@ -137,7 +137,7 @@ public class GameDataLoader : MonoBehaviour {
 		yield return new WaitForSeconds(1f);
 
 		GlobalStuff.instance.enemyGenerator.GenerateEnemies();
-		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
+		worldGenerator.GenerateWorld(temperature,humidity,pressure,skyname,wind,GlobalStuff.instance.lat,GlobalStuff.instance.lng);
 		GlobalStuff.instance.gUIManager.glitchChromatical.enabled = false;
 
 	}
