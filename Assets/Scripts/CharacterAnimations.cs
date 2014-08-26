@@ -10,7 +10,7 @@ public class CharacterAnimations : MonoBehaviour {
 	public AudioClip punch;
 	void Awake(){
 		characterProperties = GetComponent<CharacterProperties>();
-		sprite.SortingOrder = 10;
+		// sprite.SortingOrder = 10;
 	}
 
 	int fCounter = 0;
