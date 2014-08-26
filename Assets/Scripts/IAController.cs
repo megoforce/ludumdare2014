@@ -20,17 +20,17 @@ public class IAController : MonoBehaviour {
 				float deltaY = playerTransform.position.y - myTransform.position.y;
 
 				if(deltaX > 0){
-					characterProperties.horizontal = .3f;
+					characterProperties.horizontal = .9f;
 				} else if (deltaY < 0){
-					characterProperties.horizontal = -.3f;
+					characterProperties.horizontal = -.9f;
 				} else {
 					characterProperties.horizontal = 0;
 				}
 
 				if(deltaY > 0){
-					characterProperties.vertical = .3f;
+					characterProperties.vertical = 9f;
 				} else if (deltaY < 0){
-					characterProperties.vertical = -.3f;
+					characterProperties.vertical = -.9f;
 				} else {
 					characterProperties.vertical = 0;
 				}
