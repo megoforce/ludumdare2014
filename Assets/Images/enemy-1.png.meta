@@ -1,8 +1,6 @@
 fileFormatVersion: 2
-guid: 16f485cf33b9a4d1c8be9bf913cf3eb9
+guid: e43e4fd1bed724e74b5b43f7276bb110
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: terrain 1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +24,9 @@ TextureImporter:
   maxTextureSize: 4096
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -41,11 +39,7 @@ TextureImporter:
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 5
-  buildTargetSettings:
-  - buildTarget: iPhone
-    maxTextureSize: 1024
-    textureFormat: -2
-    compressionQuality: 50
+  buildTargetSettings: []
   spriteSheet:
     sprites: []
   spritePackingTag: 

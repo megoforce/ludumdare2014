@@ -24,6 +24,7 @@ public class CharacterProperties : MonoBehaviour {
 		tag = (enemy) ? "NotPlayer" : "Player";
 		characterAnimations.sprite.gameObject.tag = (enemy) ? "NotPlayerSprite" : "PlayerSprite";
 
+
 		if(!AI){
 			int cardsCounter = 0;
 			for(int i = 0; i < 5; i++)
@@ -35,6 +36,8 @@ public class CharacterProperties : MonoBehaviour {
 			armor = PlayerPrefs.GetInt("armor");
 			characterAnimations = GetComponent<CharacterAnimations>();
 			characterAnimations.sprite.spriteId = characterAnimations.sprite.GetSpriteIdByName(spriteName+"/1");
+		} else {
+			spriteName = "enemy-"+Random.Range(0,2).ToString();
 		}
 	}
 	void Start(){
