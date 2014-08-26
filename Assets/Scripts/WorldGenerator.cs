@@ -96,7 +96,7 @@ public class WorldGenerator : MonoBehaviour {
 
 					// northeast
 					if (x+1 < tileMap.height && y+1 < tileMap.width && tileMap.Layers[5].GetTile(x+1, y+1) < 0) {
-						tileMap.Layers[5].SetTile(x+1, y+1, 5);
+						tileMap.Layers[6].SetTile(x+1, y+1, 5);
 					}
 
 					// southwest
